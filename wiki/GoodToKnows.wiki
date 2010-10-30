@@ -1,0 +1,15 @@
+#Ideas to reduce sucking time...
+
+= Introduction =
+
+Add ideas here
+
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Run visual studio in admin mode
+  * Run the emulator in admin mode
+  * Run the server program in admin mode, otherwise WCF hosting will not work...
+  * When everything is running in admin mode, WCF reference adding should work...
+
