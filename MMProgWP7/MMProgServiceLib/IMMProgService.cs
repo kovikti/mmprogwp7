@@ -25,7 +25,7 @@ namespace MMProgServiceLib
     {
         string owner;
         string text;
-
+        byte[] imageData;
        
         [DataMember]
         public string Owner
@@ -38,6 +38,12 @@ namespace MMProgServiceLib
         {
             get { return text; }
             set { text = value; }
+        }
+        [DataMember]
+        public byte[] ImageData
+        {
+            get { return imageData; }
+            set { imageData = value; }
         }
 
     }

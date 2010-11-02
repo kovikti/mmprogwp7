@@ -20,7 +20,7 @@ namespace MMProgServiceLib
             MyServiceHost host = OperationContext.Current.Host as MyServiceHost;
             if (host != null)
             {
-                host.FireEvent("MessageReceived");
+                host.FireEvent("MessageReceived", message);
             }
             
         }

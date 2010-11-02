@@ -4,5 +4,6 @@
         Title="MainWindow" Height="350" Width="525">
     <Grid>
         <Button Content="Start service" Height="23" HorizontalAlignment="Left" Margin="30,23,0,0" Name="button1" VerticalAlignment="Top" Width="111" Click="button1_Click" />
+        <StackPanel Height="191" HorizontalAlignment="Left" Margin="176,23,0,0" Name="stackPanel1" VerticalAlignment="Top" Width="286" />
     </Grid>
 </Window>

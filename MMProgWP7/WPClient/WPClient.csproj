@@ -85,6 +85,14 @@
   <ItemGroup>
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml" />
+    <None Include="Service References\MMProgServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\MMProgServiceReference\configuration.svcinfo" />
+    <None Include="Service References\MMProgServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="ServiceReferences.ClientConfig" />
     <None Include="Service References\MMProgServiceReference\MMProgServiceLib.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -95,7 +103,6 @@
     <None Include="Service References\MMProgServiceReference\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="ServiceReferences.ClientConfig" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ApplicationIcon.png">
@@ -104,12 +111,6 @@
     <Content Include="Background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Service References\MMProgServiceReference\configuration91.svcinfo" />
-    <None Include="Service References\MMProgServiceReference\configuration.svcinfo" />
-    <None Include="Service References\MMProgServiceReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <Content Include="SplashScreenImage.jpg" />
   </ItemGroup>
   <ItemGroup>

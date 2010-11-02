@@ -13,11 +13,11 @@ namespace MMProgServiceLib
         {
 
         }
-        public void FireEvent(string eventName)
+        public void FireEvent(string eventName, object data)
         {
             if (EventFired != null)
             {
-                EventFired.BeginInvoke(eventName, 
+                EventFired.BeginInvoke(eventName,data, 
                     delegate(IAsyncResult iar){
                         EventFired.EndInvoke(iar);
                     }
@@ -25,7 +25,7 @@ namespace MMProgServiceLib
                 
             }
         }
-        public event Action<string> EventFired; 
+        public event Action<string,object> EventFired; 
         
     }
 }
