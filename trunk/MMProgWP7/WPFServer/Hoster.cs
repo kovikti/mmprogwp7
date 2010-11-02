@@ -16,7 +16,7 @@ namespace WPFServer
         {
             
             host = new MyServiceHost(typeof(MMProgServiceLib.MMProgService));
-            host.EventFired += new Action<string>(host_EventFired);
+            host.EventFired += new Action<string,object>(host_EventFired);
            try{
                 host.Open();
             }
@@ -26,7 +26,7 @@ namespace WPFServer
             
         }
 
-        void host_EventFired(string obj)
+        void host_EventFired(string obj,object obj2)
         {
             MessageBox.Show(obj);
         }
