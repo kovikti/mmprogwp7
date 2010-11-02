@@ -20,9 +20,24 @@ namespace WPClient.MMProgServiceReference {
     [System.Runtime.Serialization.DataContractAttribute(Name="MyMessage", Namespace="http://schemas.datacontract.org/2004/07/MMProgServiceLib")]
     public partial class MyMessage : object, System.ComponentModel.INotifyPropertyChanged {
         
+        private byte[] ImageDataField;
+        
         private string OwnerField;
         
         private string TextField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] ImageData {
+            get {
+                return this.ImageDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ImageDataField, value) != true)) {
+                    this.ImageDataField = value;
+                    this.RaisePropertyChanged("ImageData");
+                }
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string Owner {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="ae7b9e86-b897-4715-a936-45b9a925f21f" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="0b2a83b7-8113-4de2-9ccb-96eaac6ad4e5" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>true</GenerateAsynchronousMethods>
     <EnableDataBinding>true</EnableDataBinding>
@@ -23,10 +23,10 @@
     <MetadataSource Address="http://localhost:20000/MMProgService/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="76d4f952-b837-45a0-b15e-a6e49f174326" SourceId="1" SourceUrl="http://localhost:20000/MMProgService/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="e9c7b3d1-049c-4cb2-b650-b663a0514f42" SourceId="1" SourceUrl="http://localhost:20000/MMProgService/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="edfc9f5e-e69e-4041-9404-d8814af44ce1" SourceId="1" SourceUrl="http://localhost:20000/MMProgService/mex" />
-    <MetadataFile FileName="MMProgServiceLib.xsd" MetadataType="Schema" ID="f5cf1a67-758e-4f46-a82f-450a787c2b8d" SourceId="1" SourceUrl="http://localhost:20000/MMProgService/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="4131377e-cd2f-4d0f-82b2-1b57dfcf8eb4" SourceId="1" SourceUrl="http://localhost:20000/MMProgService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="b397aae6-68e8-4331-8d4a-3b5e64e1b85c" SourceId="1" SourceUrl="http://localhost:20000/MMProgService/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="865813a9-42e9-4113-ac80-8da054ff986c" SourceId="1" SourceUrl="http://localhost:20000/MMProgService/mex" />
+    <MetadataFile FileName="MMProgServiceLib.xsd" MetadataType="Schema" ID="05c4f6e5-843f-4904-b220-6e9af5bebf75" SourceId="1" SourceUrl="http://localhost:20000/MMProgService/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
