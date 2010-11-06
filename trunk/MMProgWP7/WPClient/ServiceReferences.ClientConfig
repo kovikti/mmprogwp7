@@ -5,12 +5,24 @@
                 <binding name="basicHttp" maxBufferSize="2147483647" maxReceivedMessageSize="2147483647">
                     <security mode="None" />
                 </binding>
+                <binding name="basicHttp1" maxBufferSize="2147483647" maxReceivedMessageSize="2147483647">
+                    <security mode="None" />
+                </binding>
+                <binding name="basicHttp2" maxBufferSize="2147483647" maxReceivedMessageSize="2147483647">
+                    <security mode="None" />
+                </binding>
             </basicHttpBinding>
         </bindings>
         <client>
             <endpoint address="http://localhost:20000/MMProgService" binding="basicHttpBinding"
                 bindingConfiguration="basicHttp" contract="MMProgServiceReference.IMMProgService"
                 name="basicHttp" />
+            <endpoint address="http://localhost:20000/MMProgService" binding="basicHttpBinding"
+                bindingConfiguration="basicHttp1" contract="MMProgServiceReference.IMMProgService"
+                name="basicHttp1" />
+            <endpoint address="http://localhost:20000/MMProgService" binding="basicHttpBinding"
+                bindingConfiguration="basicHttp2" contract="MMProgServiceReference.IMMProgService"
+                name="basicHttp2" />
         </client>
     </system.serviceModel>
 </configuration>
