@@ -17,12 +17,14 @@ namespace WPClient.MMProgServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="MyMessage", Namespace="http://schemas.datacontract.org/2004/07/MMProgServiceLib")]
-    public partial class MyMessage : object, System.ComponentModel.INotifyPropertyChanged {
+    [System.Runtime.Serialization.DataContractAttribute(Name="MyMessageDTO", Namespace="http://schemas.datacontract.org/2004/07/MMProgServiceLib")]
+    public partial class MyMessageDTO : object, System.ComponentModel.INotifyPropertyChanged {
         
         private byte[] ImageDataField;
         
         private string OwnerField;
+        
+        private int RotationField;
         
         private string TextField;
         
@@ -48,6 +50,19 @@ namespace WPClient.MMProgServiceReference {
                 if ((object.ReferenceEquals(this.OwnerField, value) != true)) {
                     this.OwnerField = value;
                     this.RaisePropertyChanged("Owner");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Rotation {
+            get {
+                return this.RotationField;
+            }
+            set {
+                if ((this.RotationField.Equals(value) != true)) {
+                    this.RotationField = value;
+                    this.RaisePropertyChanged("Rotation");
                 }
             }
         }
@@ -80,7 +95,7 @@ namespace WPClient.MMProgServiceReference {
     public interface IMMProgService {
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IMMProgService/SendMessageToServer", ReplyAction="http://tempuri.org/IMMProgService/SendMessageToServerResponse")]
-        System.IAsyncResult BeginSendMessageToServer(WPClient.MMProgServiceReference.MyMessage message, System.AsyncCallback callback, object asyncState);
+        System.IAsyncResult BeginSendMessageToServer(WPClient.MMProgServiceReference.MyMessageDTO message, System.AsyncCallback callback, object asyncState);
         
         void EndSendMessageToServer(System.IAsyncResult result);
     }
@@ -159,7 +174,7 @@ namespace WPClient.MMProgServiceReference {
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> CloseCompleted;
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult WPClient.MMProgServiceReference.IMMProgService.BeginSendMessageToServer(WPClient.MMProgServiceReference.MyMessage message, System.AsyncCallback callback, object asyncState) {
+        System.IAsyncResult WPClient.MMProgServiceReference.IMMProgService.BeginSendMessageToServer(WPClient.MMProgServiceReference.MyMessageDTO message, System.AsyncCallback callback, object asyncState) {
             return base.Channel.BeginSendMessageToServer(message, callback, asyncState);
         }
         
@@ -169,7 +184,7 @@ namespace WPClient.MMProgServiceReference {
         }
         
         private System.IAsyncResult OnBeginSendMessageToServer(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            WPClient.MMProgServiceReference.MyMessage message = ((WPClient.MMProgServiceReference.MyMessage)(inValues[0]));
+            WPClient.MMProgServiceReference.MyMessageDTO message = ((WPClient.MMProgServiceReference.MyMessageDTO)(inValues[0]));
             return ((WPClient.MMProgServiceReference.IMMProgService)(this)).BeginSendMessageToServer(message, callback, asyncState);
         }
         
@@ -185,11 +200,11 @@ namespace WPClient.MMProgServiceReference {
             }
         }
         
-        public void SendMessageToServerAsync(WPClient.MMProgServiceReference.MyMessage message) {
+        public void SendMessageToServerAsync(WPClient.MMProgServiceReference.MyMessageDTO message) {
             this.SendMessageToServerAsync(message, null);
         }
         
-        public void SendMessageToServerAsync(WPClient.MMProgServiceReference.MyMessage message, object userState) {
+        public void SendMessageToServerAsync(WPClient.MMProgServiceReference.MyMessageDTO message, object userState) {
             if ((this.onBeginSendMessageToServerDelegate == null)) {
                 this.onBeginSendMessageToServerDelegate = new BeginOperationDelegate(this.OnBeginSendMessageToServer);
             }
@@ -279,7 +294,7 @@ namespace WPClient.MMProgServiceReference {
                     base(client) {
             }
             
-            public System.IAsyncResult BeginSendMessageToServer(WPClient.MMProgServiceReference.MyMessage message, System.AsyncCallback callback, object asyncState) {
+            public System.IAsyncResult BeginSendMessageToServer(WPClient.MMProgServiceReference.MyMessageDTO message, System.AsyncCallback callback, object asyncState) {
                 object[] _args = new object[1];
                 _args[0] = message;
                 System.IAsyncResult _result = base.BeginInvoke("SendMessageToServer", _args, callback, asyncState);
