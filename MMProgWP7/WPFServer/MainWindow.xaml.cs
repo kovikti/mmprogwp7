@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ServiceModel;
+using MMProgServiceLib;
 
 namespace WPFServer
 {
@@ -23,20 +24,24 @@ namespace WPFServer
         public MainWindow()
         {
             InitializeComponent();
-
-
-            
+            hoster = new Hoster();
+            hoster.MessageReceivedEvent += new Action<MyMessage>(hoster_MessageReceivedEvent);
 
         }
-        //ServiceHost host;
+        Hoster hoster;
 
 
-        private void button1_Click(object sender, RoutedEventArgs e)
+        void hoster_MessageReceivedEvent(MyMessage obj)
         {
- //host = new ServiceHost(typeof(MMProgServiceLib.MMProgService));
- //           host.Open();
-
-            Hoster hoster = new Hoster();
+            //KV: Is this actually they way it is usually done?
+            Dispatcher.Invoke(
+                new Action(() =>
+                {
+                    lvMessages.Items.Add(obj);
+                }), System.Windows.Threading.DispatcherPriority.Normal);
+        
         }
+
+
     }
 }

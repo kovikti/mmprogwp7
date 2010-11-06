@@ -26,10 +26,23 @@ namespace WPFServer
             
         }
 
-        void host_EventFired(string obj,object obj2)
+        void host_EventFired(string eventName,object param)
         {
-            MessageBox.Show(obj);
+            if (eventName == "MessageReceived")
+            {
+                MyMessageDTO dto = param as MyMessageDTO;
+                if (dto != null)
+                {
+                    MyMessage msg = new MyMessage(dto);
+                    if (MessageReceivedEvent != null)
+                    {
+                        MessageReceivedEvent( msg);
+                    }
+                }
+            }
         }
+        //KV: EventHandler or Action? Do we need to know the sender? MyMessage has to be inherited from TEventArgs
+        public event Action<MyMessage> MessageReceivedEvent;
 
         #region IDisposable Members
 
