@@ -15,7 +15,7 @@ namespace MMProgServiceLib
 
         #region IMMProgService Members
 
-        public void SendMessageToServer(MyMessage message)
+        public void SendMessageToServer(MyMessageDTO message)
         {
             MyServiceHost host = OperationContext.Current.Host as MyServiceHost;
             if (host != null)

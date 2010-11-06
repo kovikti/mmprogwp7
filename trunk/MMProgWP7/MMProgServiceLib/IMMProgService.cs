@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using System.IO;
 
 namespace MMProgServiceLib
 {
@@ -12,7 +13,7 @@ namespace MMProgServiceLib
     public interface IMMProgService
     {
         [OperationContract]
-        void SendMessageToServer(MyMessage message);
+        void SendMessageToServer(MyMessageDTO message);
 
        
 
@@ -21,7 +22,7 @@ namespace MMProgServiceLib
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations
     [DataContract]
-    public class MyMessage
+    public class MyMessageDTO
     {
         string owner;
         string text;
@@ -45,6 +46,8 @@ namespace MMProgServiceLib
             get { return imageData; }
             set { imageData = value; }
         }
+
+        
 
     }
 }
