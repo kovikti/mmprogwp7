@@ -32,6 +32,20 @@ namespace WPFServer
                 MemoryStream ms = new MemoryStream(ImageData);
                 ms.Seek(0,SeekOrigin.Begin);
                 img.StreamSource = ms;
+                System.Windows.Media.Imaging.Rotation rot = System.Windows.Media.Imaging.Rotation.Rotate0;
+                switch (Rotation)
+                {
+                    
+                    case 90: rot = System.Windows.Media.Imaging.Rotation.Rotate90;
+                        break;
+                    case 180: rot=System.Windows.Media.Imaging.Rotation.Rotate180;
+                        break;
+                    case 270: rot=System.Windows.Media.Imaging.Rotation.Rotate270;
+                        break;
+                     default: rot=System.Windows.Media.Imaging.Rotation.Rotate0;
+                        break;
+                }
+                img.Rotation = rot;
                 img.EndInit();
                  //KV: Actually this is still funny, how it manages memory...
                 img.Freeze();
