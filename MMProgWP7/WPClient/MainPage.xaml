@@ -33,6 +33,7 @@
             <TextBox Height="439" HorizontalAlignment="Left" Margin="125,84,0,0" Name="tbMessage" Text="Text" VerticalAlignment="Top" Width="309" TextWrapping="Wrap" />
             <TextBlock Height="39" HorizontalAlignment="Left" Margin="22,28,0,0" Name="textBlock1" Text="Name:" VerticalAlignment="Top" FontSize="26" />
             <TextBlock Height="37" HorizontalAlignment="Left" Margin="12,104,0,0" Name="textBlock2" Text="Message:" VerticalAlignment="Top" FontSize="26" />
+            <Button Content="Send default" Height="72" HorizontalAlignment="Left" Margin="0,529,0,0" Name="button1" VerticalAlignment="Top" Width="199" Click="button1_Click" />
         </Grid>
     </Grid>
  

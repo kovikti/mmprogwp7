@@ -16,7 +16,7 @@
         <StackPanel  Name="stackPanel2" Width="155">
             <TextBlock Height="23" Name="tbOwner" Text="{Binding Path=myMessage.Owner}" /><!---->
             <TextBlock Height="23" Name="tbText" Text="{Binding Path=myMessage.Text}" /> <!---->
-            <Rectangle Width="20" Height="10" Fill="Blue"/>
+            <!--<Rectangle Width="20" Height="10" Fill="Blue"/>-->
         </StackPanel>
     </StackPanel>
 </UserControl>
