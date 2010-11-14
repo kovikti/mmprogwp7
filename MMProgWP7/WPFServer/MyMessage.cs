@@ -5,23 +5,125 @@ using System.Text;
 using MMProgServiceLib;
 using System.Windows.Media.Imaging;
 using System.IO;
+using System.Windows;
+using System.ComponentModel;
 
 namespace WPFServer
 {
-    public class MyMessage:MyMessageDTO
+    public class MyMessage: INotifyPropertyChanged //DependencyObject
     {
+        public MyMessage()
+        {
+            this.Text = "Text";
+            this.Owner = "Owner";
+            this.Image = new BitmapImage(new Uri("def.jpg",UriKind.RelativeOrAbsolute));
+
+        }
+
         public MyMessage(MyMessageDTO orig)
         {
             this.Owner = orig.Owner;
             this.Text = orig.Text;
-            this.ImageData = orig.ImageData;
+            this.Image = CreateImage(orig.ImageData,orig.Rotation);
+           // this.Image = new BitmapImage(new Uri("def.jpg", UriKind.RelativeOrAbsolute));
         }
 
+
+        string owner;
+        string text;
+        BitmapImage image;
+
+        public string Owner
+        {
+            get { return owner; }
+            set
+            {
+                if (owner != value)
+                {
+                    owner = value;
+                    NotifyPropertyChanged("Owner");
+                }
+            }
+        }
+        public string Text
+        {
+            get { return text; }
+            set
+            {
+                if (text != value)
+                {
+                    text = value;
+                    NotifyPropertyChanged("Text");
+                }
+            }
+        }
         public BitmapImage Image
         {
-            get
+            get { return image; }
+            set
             {
-                BitmapImage img = new BitmapImage();
+                if (image != value)
+                {
+                    image = value;
+                    NotifyPropertyChanged("Image");
+                }
+            }
+        }
+        protected void NotifyPropertyChanged(String propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        
+
+        //public string Owner { get; set; }
+        //public string Text { get; set; }
+        //public BitmapSource Image { get; set; }
+         /*public string Owner
+         {
+             get { return (string)GetValue(OwnerProperty); }
+             set { SetValue(OwnerProperty, value); }
+         }
+
+         // Using a DependencyProperty as the backing store for Owner.  This enables animation, styling, binding, etc...
+         public static readonly DependencyProperty OwnerProperty =
+             DependencyProperty.Register("Owner", typeof(string), typeof(MyMessage), new UIPropertyMetadata(0));
+
+
+
+         public string Text
+         {
+             get { return (string)GetValue(TextProperty); }
+             set { SetValue(TextProperty, value); }
+         }
+
+         // Using a DependencyProperty as the backing store for Text.  This enables animation, styling, binding, etc...
+         public static readonly DependencyProperty TextProperty =
+             DependencyProperty.Register("Text", typeof(string), typeof(MyMessage), new UIPropertyMetadata(0));
+
+
+
+
+         public BitmapSource Image
+         {
+             get { return (BitmapSource)GetValue(ImageProperty); }
+             set { SetValue(ImageProperty, value); }
+         }
+
+         // Using a DependencyProperty as the backing store for Image.  This enables animation, styling, binding, etc...
+         public static readonly DependencyProperty ImageProperty =
+             DependencyProperty.Register("Image", typeof(BitmapSource), typeof(MyMessage), new UIPropertyMetadata(0));
+        */
+         
+
+        BitmapImage CreateImage(byte[] data,int Rotation)
+        {
+            BitmapImage img = null;
+            try
+            {
+                img = new BitmapImage();
 
                 img.BeginInit();
                 img.CacheOption = BitmapCacheOption.OnLoad;
@@ -29,29 +131,33 @@ namespace WPFServer
                 /*var fs=File.Open(@"d:\temp\pp\p.bmp",FileMode.Create);
                 fs.Write(ImageData,0,ImageData.Length);
                 fs.Close();*/
-                MemoryStream ms = new MemoryStream(ImageData);
-                ms.Seek(0,SeekOrigin.Begin);
+                MemoryStream ms = new MemoryStream(data);
+                ms.Seek(0, SeekOrigin.Begin);
                 img.StreamSource = ms;
                 System.Windows.Media.Imaging.Rotation rot = System.Windows.Media.Imaging.Rotation.Rotate0;
                 switch (Rotation)
                 {
-                    
+
                     case 90: rot = System.Windows.Media.Imaging.Rotation.Rotate90;
                         break;
-                    case 180: rot=System.Windows.Media.Imaging.Rotation.Rotate180;
+                    case 180: rot = System.Windows.Media.Imaging.Rotation.Rotate180;
                         break;
-                    case 270: rot=System.Windows.Media.Imaging.Rotation.Rotate270;
+                    case 270: rot = System.Windows.Media.Imaging.Rotation.Rotate270;
                         break;
-                     default: rot=System.Windows.Media.Imaging.Rotation.Rotate0;
+                    default: rot = System.Windows.Media.Imaging.Rotation.Rotate0;
                         break;
                 }
                 img.Rotation = rot;
                 img.EndInit();
-                 //KV: Actually this is still funny, how it manages memory...
+                //KV: Actually this is still funny, how it manages memory...
                 img.Freeze();
                 ms.Close();
-                return img;
             }
+            catch { }
+            return img;
         }
+        
+
+       
     }
 }

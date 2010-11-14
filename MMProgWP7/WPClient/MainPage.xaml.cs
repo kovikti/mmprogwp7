@@ -10,7 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
-using WPClient.MMProgServiceReference;
+using WPClient.MMProgService;
 using Microsoft.Phone.Tasks;
 using System.IO;
 using System.Threading;
