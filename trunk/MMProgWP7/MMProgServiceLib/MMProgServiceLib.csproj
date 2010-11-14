@@ -43,6 +43,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MyMessageDTO.cs" />
     <Compile Include="MyServiceHost.cs" />
     <Compile Include="IMMProgService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

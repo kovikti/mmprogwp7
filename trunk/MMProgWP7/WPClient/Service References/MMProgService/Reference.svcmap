@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="2636cb47-502d-45f3-bd3e-0b097607c481" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>true</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.ObjectModel.ObservableCollection`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>false</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:20000/MMProgService" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="MMProgService.xsd" MetadataType="Schema" ID="8e485a54-efad-4206-be10-dabfa2dcf40f" SourceId="1" SourceUrl="http://localhost:20000/MMProgService?xsd=xsd2" />
+    <MetadataFile FileName="MMProgService1.xsd" MetadataType="Schema" ID="9fe9f13b-a1ed-45f7-a26e-7510021edb71" SourceId="1" SourceUrl="http://localhost:20000/MMProgService?xsd=xsd0" />
+    <MetadataFile FileName="MMProgService.wsdl" MetadataType="Wsdl" ID="7e081b38-e9b2-40b6-95bb-498d817291b4" SourceId="1" SourceUrl="http://localhost:20000/MMProgService?wsdl" />
+    <MetadataFile FileName="MMProgService.disco" MetadataType="Disco" ID="28a671c9-e31d-4407-a0ca-0a19d4ccf4de" SourceId="1" SourceUrl="http://localhost:20000/MMProgService?disco" />
+    <MetadataFile FileName="MMProgService2.xsd" MetadataType="Schema" ID="134b4bb2-8433-4b7a-91b5-d930c19886a7" SourceId="1" SourceUrl="http://localhost:20000/MMProgService?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
