@@ -32,6 +32,7 @@ namespace WPClient
 
         void client_SendMessageToServerCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
         {
+            //TODO error handling?
             (sender as MMProgServiceClient).CloseAsync();
         }
 
@@ -80,6 +81,34 @@ namespace WPClient
                 client.SendMessageToServerAsync(new MyMessageDTO() { Owner = tbName.Text, Text = tbMessage.Text, ImageData=data, Rotation=rotate });
          
             }
+        }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            byte[] imgdata;
+            
+            using (Stream fs = Application.GetResourceStream(new Uri("def.jpg",UriKind.RelativeOrAbsolute)).Stream)
+            {
+                MemoryStream ms = new MemoryStream();
+                byte[] data = new byte[2048];
+                int offset=0;
+                while (fs.Position < fs.Length)
+                {
+                    int num=fs.Read(data,0,data.Length);
+                    ms.Write(data, offset, num);
+                }
+                imgdata = ms.ToArray();
+                ms.Dispose();
+            }
+            
+            MMProgServiceClient client = new MMProgServiceClient();
+            client.SendMessageToServerCompleted += new EventHandler<System.ComponentModel.AsyncCompletedEventArgs>(client_SendMessageToServerCompleted);
+            client.SendMessageToServerAsync(new MyMessageDTO() { Owner = tbName.Text, Text = tbMessage.Text, ImageData = imgdata, Rotation = 0 });
+            
+
+            
+            
+
         }
     }
 }

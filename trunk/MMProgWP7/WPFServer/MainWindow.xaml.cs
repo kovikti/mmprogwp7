@@ -61,6 +61,7 @@ namespace WPFServer
                 {
                     MyMessage msg = new MyMessage(obj);
                     lvMessages.Items.Add(msg);
+                    lvMessages.ScrollIntoView(msg);
                     MessageControl msgc = new MessageControl();
                     msgc.SetMessage(msg);
                     //stackPanel1.Children.Add(msgc);

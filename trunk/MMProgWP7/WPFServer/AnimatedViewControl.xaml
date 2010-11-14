@@ -22,13 +22,13 @@
                         <AxisAngleRotation3D Axis="0,-1,0" Angle="90"/>
                     </Rotation3DAnimation.To>
                 </Rotation3DAnimation>
-                <!--<DoubleAnimation 
+                <DoubleAnimation 
                     Storyboard.TargetName="OldDiffuseMaterial"
                     Storyboard.TargetProperty="Brush.Opacity"
                     From="1"
                     To="0"
                     BeginTime="0:0:0.5"
-                    Duration="0:0:0.5"/>-->
+                    Duration="0:0:0.5"/>
                            
             </Storyboard>
             
@@ -52,13 +52,13 @@
                     From="0"
                     To="2"
                     Duration="0:0:1.0" />
-                <!--<DoubleAnimation 
+                <DoubleAnimation 
                     Storyboard.TargetName="OldDiffuseMaterial"
                     Storyboard.TargetProperty="Brush.Opacity"
                     From="1"
                     To="0"
                     BeginTime="0:0:0.5"
-                    Duration="0:0:0.5"/>-->
+                    Duration="0:0:0.5"/>
             </Storyboard>
             <Storyboard  Completed="Storyboard_Completed" FillBehavior="Stop">
                 <Rotation3DAnimation 
@@ -84,13 +84,13 @@
                     From="0"
                     To="1"
                     Duration="0:0:1.0" />
-                <!--<DoubleAnimation 
+                <DoubleAnimation 
                     Storyboard.TargetName="OldDiffuseMaterial"
                     Storyboard.TargetProperty="Brush.Opacity"
                     From="1"
                     To="0"
                     BeginTime="0:0:0.5"
-                    Duration="0:0:0.5"/>-->
+                    Duration="0:0:0.5"/>
             </Storyboard>
             <Storyboard Completed="Storyboard_Completed" FillBehavior="Stop">
                 <Rotation3DAnimation 
@@ -127,13 +127,13 @@
                     From="0"
                     To="1.6"
                     Duration="0:0:1.0" />
-                <!--<DoubleAnimation 
+                <DoubleAnimation 
                     Storyboard.TargetName="OldDiffuseMaterial"
                     Storyboard.TargetProperty="Brush.Opacity"
                     From="1"
                     To="0"
                     BeginTime="0:0:0.5"
-                    Duration="0:0:0.5"/>-->
+                    Duration="0:0:0.5"/>
             </Storyboard>
 
 
@@ -144,13 +144,13 @@
                     From="0"
                     To="2"
                     Duration="0:0:1.0" />
-                <!--<DoubleAnimation 
+                <DoubleAnimation 
                     Storyboard.TargetName="OldDiffuseMaterial"
                     Storyboard.TargetProperty="Brush.Opacity"
                     From="1"
                     To="0"
                     BeginTime="0:0:0.5"
-                    Duration="0:0:0.5"/>-->
+                    Duration="0:0:0.5"/>
             </Storyboard>
             <!---->
             
@@ -167,13 +167,13 @@
                     From="0"
                     To="0.5"
                     Duration="0:0:0.5" />   
-                 <!--<DoubleAnimation 
+                 <DoubleAnimation 
                     Storyboard.TargetName="OldDiffuseMaterial"
                     Storyboard.TargetProperty="Brush.Opacity"
                     From="1"
                     To="0"
                     BeginTime="0:0:0.5"
-                    Duration="0:0:0.5"/>-->
+                    Duration="0:0:0.5"/>
                <Rotation3DAnimation 
                 Storyboard.TargetName="OldImageRotate" 
                 Storyboard.TargetProperty="Rotation"
@@ -185,13 +185,13 @@
                         <AxisAngleRotation3D Axis="0,0.3,-0.5" Angle="180"/>
                     </Rotation3DAnimation.To>
                 </Rotation3DAnimation>      
-                <!--<DoubleAnimation 
+                <DoubleAnimation 
                     Storyboard.TargetName="OldDiffuseMaterial"
                     Storyboard.TargetProperty="Brush.Opacity"
                     From="1"
                     To="0"
                     BeginTime="0:0:0.5"
-                    Duration="0:0:0.5"/>-->
+                    Duration="0:0:0.5"/>
             </Storyboard>    
             
               <Storyboard  Completed="Storyboard_Completed" FillBehavior="Stop">
@@ -286,11 +286,11 @@
                             </GeometryModel3D.Geometry>
                             <GeometryModel3D.Material>
                                 <DiffuseMaterial x:Name="OldDiffuseMaterial">
-                                    <!--<DiffuseMaterial.Brush>-->
+                                    <DiffuseMaterial.Brush>
                                         <!--<TileBrush x:Name="OldImageBrush" Opacity="1"></TileBrush>-->
-                                       
+                                        <SolidColorBrush Color="Black"></SolidColorBrush>
 
-                                    <!--</DiffuseMaterial.Brush>-->
+                                    </DiffuseMaterial.Brush>
 
                                 </DiffuseMaterial>
                             </GeometryModel3D.Material>
@@ -318,9 +318,10 @@
                             </GeometryModel3D.Geometry>
                             <GeometryModel3D.Material>
                                 <DiffuseMaterial x:Name="NewDiffuseMaterial">
-                                    <!--<DiffuseMaterial.Brush>
-                                        <ImageBrush x:Name="NewImageBrush" Opacity="1" ></ImageBrush>
-                                    </DiffuseMaterial.Brush>-->
+                                   <DiffuseMaterial.Brush>
+                                        <!--<ImageBrush x:Name="NewImageBrush" Opacity="1" ></ImageBrush>-->
+                                    <SolidColorBrush Color="Black"></SolidColorBrush>
+                                    </DiffuseMaterial.Brush>
                                     </DiffuseMaterial>
                                     </GeometryModel3D.Material>
                                     <GeometryModel3D.Transform>
