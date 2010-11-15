@@ -6,9 +6,14 @@
       <xs:element minOccurs="0" name="Id" type="ser:guid" />
       <xs:element minOccurs="0" name="ImageData" nillable="true" type="xs:base64Binary" />
       <xs:element minOccurs="0" name="Owner" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Rotation" type="xs:int" />
       <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="MyMessageDTO" nillable="true" type="tns:MyMessageDTO" />
+  <xs:complexType name="ArrayOfMyMessageDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MyMessageDTO" nillable="true" type="tns:MyMessageDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfMyMessageDTO" nillable="true" type="tns:ArrayOfMyMessageDTO" />
 </xs:schema>
