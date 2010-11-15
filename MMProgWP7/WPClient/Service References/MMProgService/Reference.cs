@@ -20,6 +20,8 @@ namespace WPClient.MMProgService {
     [System.Runtime.Serialization.DataContractAttribute(Name="MyMessageDTO", Namespace="http://schemas.datacontract.org/2004/07/MMProgServiceLib")]
     public partial class MyMessageDTO : object, System.ComponentModel.INotifyPropertyChanged {
         
+        private System.Guid IdField;
+        
         private byte[] ImageDataField;
         
         private string OwnerField;
@@ -27,6 +29,19 @@ namespace WPClient.MMProgService {
         private int RotationField;
         
         private string TextField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Guid Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public byte[] ImageData {

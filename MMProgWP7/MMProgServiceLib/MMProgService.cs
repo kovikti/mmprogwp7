@@ -25,6 +25,16 @@ namespace MMProgServiceLib
             
         }
 
+        public IList<MyMessageDTO> GetNewMessages(Guid? lastGuid,int maxnum)
+        {
+            MyServiceHost host = OperationContext.Current.Host as MyServiceHost;
+            if (host != null)
+            {
+                return host.Hoster.GetDTOUntilGuid(lastGuid, maxnum);
+            }
+            return null;
+        }
+
         #endregion
     }
 }

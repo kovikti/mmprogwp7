@@ -60,7 +60,7 @@ namespace WPClient
         {
             if (e.TaskResult == TaskResult.OK)
             {
-                byte[] data = new byte[e.ChosenPhoto.Length];
+                /*byte[] data = new byte[e.ChosenPhoto.Length];
                 e.ChosenPhoto.Read(data, 0, data.Length);
                 int rotate = 0;
                 if (accEvent.WaitOne(100))
@@ -74,7 +74,13 @@ namespace WPClient
                         rotate = 180;
                     else if (acceleroData.Y > 0.5)
                         rotate = 270;
-                }
+                }*/
+
+                int angle = ImageHelper.GetAngleFromJpegStream(e.ChosenPhoto);//HACK HERE!!!
+                MemoryStream s = ImageHelper.ResampleRotateBitmapStream(e.ChosenPhoto, angle, 640, 70);
+                byte[] data = s.ToArray();
+                s.Close();
+                int rotate = 0;
 
                 MMProgServiceClient client = new MMProgServiceClient();
                 client.SendMessageToServerCompleted += new EventHandler<System.ComponentModel.AsyncCompletedEventArgs>(client_SendMessageToServerCompleted);

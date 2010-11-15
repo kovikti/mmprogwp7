@@ -13,6 +13,7 @@ namespace MMProgServiceLib
         {
 
         }
+        //Or have a reference to the appropriate object+interface!... or through singleton... lots of options
         public void FireEvent(string eventName, object data)
         {
             if (EventFired != null)
@@ -25,7 +26,29 @@ namespace MMProgServiceLib
                 
             }
         }
-        public event Action<string,object> EventFired; 
+        public event Action<string,object> EventFired;
+
+
+        //IList<MyMessageDTO> dtoList;
+
+        /*public void SetDTOList(IList<MyMessageDTO> list)
+        {
+            dtoList = list;
+        }*/
+
+        IHoster hoster;
+
+        public IHoster Hoster
+        {
+            get { return hoster; }
+            set { hoster = value; }
+        }
+
+        //public void SetHoster(IHoster ih){
+        //    hoster=ih;
+        //}
+
+
         
     }
 }

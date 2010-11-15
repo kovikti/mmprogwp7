@@ -7,16 +7,16 @@
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="300"
-             Width="300" Height="100">
+             Width="438" Height="300">
     <!--<UserControl.Resources>
         <my:MyMessage x:Key="myMessageResource"></my:MyMessage>
     </UserControl.Resources>-->
-    <StackPanel  HorizontalAlignment="Left" Name="stackPanel1" Orientation="Horizontal">
-        <Image Height="100" Name="image" Stretch="Fill" Width="133" Source="{Binding Path=myMessage.Image}" />
-        <StackPanel  Name="stackPanel2" Width="155">
+    <DockPanel  HorizontalAlignment="Stretch" Name="stackPanel1" VerticalAlignment="Stretch" LastChildFill="True">
+        <Image  Name="image" Stretch="Uniform" Width="222" Source="{Binding Path=myMessage.Image}" />
+        <StackPanel  Name="stackPanel2">
             <TextBlock Height="23" Name="tbOwner" Text="{Binding Path=myMessage.Owner}" /><!---->
             <TextBlock Height="23" Name="tbText" Text="{Binding Path=myMessage.Text}" /> <!---->
             <!--<Rectangle Width="20" Height="10" Fill="Blue"/>-->
         </StackPanel>
-    </StackPanel>
+    </DockPanel>
 </UserControl>

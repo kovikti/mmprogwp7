@@ -17,14 +17,15 @@ namespace WPFServer
             this.Text = "Text";
             this.Owner = "Owner";
             this.Image = new BitmapImage(new Uri("def.jpg",UriKind.RelativeOrAbsolute));
-
+            this.id = new Guid();
         }
 
         public MyMessage(MyMessageDTO orig)
         {
             this.Owner = orig.Owner;
             this.Text = orig.Text;
-            this.Image = CreateImage(orig.ImageData,orig.Rotation);
+            this.id = orig.Id;
+            this.Image = CreateImage(orig.ImageData);
            // this.Image = new BitmapImage(new Uri("def.jpg", UriKind.RelativeOrAbsolute));
         }
 
@@ -32,6 +33,7 @@ namespace WPFServer
         string owner;
         string text;
         BitmapImage image;
+        Guid id;
 
         public string Owner
         {
@@ -69,6 +71,20 @@ namespace WPFServer
                 }
             }
         }
+
+        public Guid Id
+        {
+            get { return id; }
+            set
+            {
+                if (id != value)
+                {
+                    id = value;
+                    NotifyPropertyChanged("Id");
+                }
+            }
+        }
+
         protected void NotifyPropertyChanged(String propertyName)
         {
             if (PropertyChanged != null)
@@ -118,7 +134,7 @@ namespace WPFServer
         */
          
 
-        BitmapImage CreateImage(byte[] data,int Rotation)
+        BitmapImage CreateImage(byte[] data)
         {
             BitmapImage img = null;
             try
@@ -134,7 +150,7 @@ namespace WPFServer
                 MemoryStream ms = new MemoryStream(data);
                 ms.Seek(0, SeekOrigin.Begin);
                 img.StreamSource = ms;
-                System.Windows.Media.Imaging.Rotation rot = System.Windows.Media.Imaging.Rotation.Rotate0;
+                /*System.Windows.Media.Imaging.Rotation rot = System.Windows.Media.Imaging.Rotation.Rotate0;
                 switch (Rotation)
                 {
 
@@ -147,7 +163,7 @@ namespace WPFServer
                     default: rot = System.Windows.Media.Imaging.Rotation.Rotate0;
                         break;
                 }
-                img.Rotation = rot;
+                img.Rotation = rot;*/
                 img.EndInit();
                 //KV: Actually this is still funny, how it manages memory...
                 img.Freeze();
@@ -155,6 +171,26 @@ namespace WPFServer
             }
             catch { }
             return img;
+        }
+
+
+        public MyMessageDTO ToMyMessageDTO()
+        {
+            MyMessageDTO dto = new MyMessageDTO();
+
+            dto.Owner = Owner;
+            dto.Text = Text;
+            dto.Id = Id;
+            byte[] data = null;
+            Stream s = Image.StreamSource;
+            if (s != null && s.Length>0)
+            {
+                s.Read(data, 0, (Int32)s.Length);
+            }
+            dto.ImageData = data;
+
+            return dto;
+
         }
         
 
