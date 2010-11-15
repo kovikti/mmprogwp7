@@ -21,7 +21,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="{Binding Path=Image}" Margin="2" Stretch="UniformToFill" Width="133" Height="100" ></Image>
+                        <Image Source="{Binding Path=Image}" Margin="2" Stretch="Uniform" Width="133" Height="100" ></Image>
                         <StackPanel Orientation="Vertical">
                             <TextBlock Text="{Binding Path=Owner}" Margin="2"></TextBlock>
                             <TextBlock Text="{Binding Path=Text}" Margin="2"></TextBlock>

@@ -15,7 +15,8 @@ namespace MMProgServiceLib
         [OperationContract]
         void SendMessageToServer(MyMessageDTO message);
 
-       
+        [OperationContract]
+        IList<MyMessageDTO> GetNewMessages(Guid? lastGuid, int maxnum);//nullable?
 
         // TODO: Add your service operations here
     }

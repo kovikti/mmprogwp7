@@ -67,7 +67,7 @@ namespace WPFServer
                     //stackPanel1.Children.Add(msgc);
                     //msgc.Resources["myMessageResource"] = obj;
                     //animatedViewControl1.SetNewImage(GetBitmapOfVisual(msgc));
-                    animatedViewControl1.SetNewBrush(new VisualBrush(msgc), 300, 100);
+                    animatedViewControl1.SetNewBrush(new VisualBrush(msgc), msgc.Width, msgc.Height);
                     //stackPanel1.Children.Add(msgc);
                     //image1.Source = GetBitmapOfVisual(msgc);
                 }), System.Windows.Threading.DispatcherPriority.Normal);

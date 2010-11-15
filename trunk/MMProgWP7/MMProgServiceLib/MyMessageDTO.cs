@@ -10,10 +10,15 @@ namespace MMProgServiceLib
     [DataContract]
     public class MyMessageDTO
     {
+        public MyMessageDTO()
+        {
+            id = new Guid();//is it Guid.NewGuid()?
+        }
         string owner;
         string text;
         byte[] imageData;
-        int rotation;
+        Guid id;
+        //int rotation;
 
         [DataMember]
         public string Owner
@@ -33,11 +38,18 @@ namespace MMProgServiceLib
             get { return imageData; }
             set { imageData = value; }
         }
+        //[DataMember]
+        //public int Rotation
+        //{
+        //    get { return rotation; }
+        //    set { rotation = value; }
+        //}
         [DataMember]
-        public int Rotation
+        public Guid Id
         {
-            get { return rotation; }
-            set { rotation = value; }
+            get { return id; }
+            set { id = value; }
         }
+
     }
 }
