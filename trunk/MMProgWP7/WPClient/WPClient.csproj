@@ -110,6 +110,9 @@
     <None Include="Service References\MMProgService\MMProgService2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\MMProgService\WPClient.MMProgService.MyMessageDTO.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="ApplicationIcon.png">

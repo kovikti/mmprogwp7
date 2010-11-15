@@ -23,11 +23,11 @@
     <MetadataSource Address="http://localhost:20000/MMProgService" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="MMProgService.xsd" MetadataType="Schema" ID="8e485a54-efad-4206-be10-dabfa2dcf40f" SourceId="1" SourceUrl="http://localhost:20000/MMProgService?xsd=xsd2" />
-    <MetadataFile FileName="MMProgService1.xsd" MetadataType="Schema" ID="9fe9f13b-a1ed-45f7-a26e-7510021edb71" SourceId="1" SourceUrl="http://localhost:20000/MMProgService?xsd=xsd0" />
-    <MetadataFile FileName="MMProgService.wsdl" MetadataType="Wsdl" ID="7e081b38-e9b2-40b6-95bb-498d817291b4" SourceId="1" SourceUrl="http://localhost:20000/MMProgService?wsdl" />
     <MetadataFile FileName="MMProgService.disco" MetadataType="Disco" ID="28a671c9-e31d-4407-a0ca-0a19d4ccf4de" SourceId="1" SourceUrl="http://localhost:20000/MMProgService?disco" />
+    <MetadataFile FileName="MMProgService.wsdl" MetadataType="Wsdl" ID="7e081b38-e9b2-40b6-95bb-498d817291b4" SourceId="1" SourceUrl="http://localhost:20000/MMProgService?wsdl" />
+    <MetadataFile FileName="MMProgService1.xsd" MetadataType="Schema" ID="9fe9f13b-a1ed-45f7-a26e-7510021edb71" SourceId="1" SourceUrl="http://localhost:20000/MMProgService?xsd=xsd0" />
     <MetadataFile FileName="MMProgService2.xsd" MetadataType="Schema" ID="134b4bb2-8433-4b7a-91b5-d930c19886a7" SourceId="1" SourceUrl="http://localhost:20000/MMProgService?xsd=xsd1" />
+    <MetadataFile FileName="MMProgService.xsd" MetadataType="Schema" ID="8e485a54-efad-4206-be10-dabfa2dcf40f" SourceId="1" SourceUrl="http://localhost:20000/MMProgService?xsd=xsd2" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

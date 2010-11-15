@@ -26,8 +26,6 @@ namespace WPClient.MMProgService {
         
         private string OwnerField;
         
-        private int RotationField;
-        
         private string TextField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
@@ -70,19 +68,6 @@ namespace WPClient.MMProgService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Rotation {
-            get {
-                return this.RotationField;
-            }
-            set {
-                if ((this.RotationField.Equals(value) != true)) {
-                    this.RotationField = value;
-                    this.RaisePropertyChanged("Rotation");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public string Text {
             get {
                 return this.TextField;
@@ -113,10 +98,34 @@ namespace WPClient.MMProgService {
         System.IAsyncResult BeginSendMessageToServer(WPClient.MMProgService.MyMessageDTO message, System.AsyncCallback callback, object asyncState);
         
         void EndSendMessageToServer(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IMMProgService/GetNewMessages", ReplyAction="http://tempuri.org/IMMProgService/GetNewMessagesResponse")]
+        System.IAsyncResult BeginGetNewMessages(System.Nullable<System.Guid> lastGuid, int maxnum, System.AsyncCallback callback, object asyncState);
+        
+        System.Collections.ObjectModel.ObservableCollection<WPClient.MMProgService.MyMessageDTO> EndGetNewMessages(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IMMProgServiceChannel : WPClient.MMProgService.IMMProgService, System.ServiceModel.IClientChannel {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetNewMessagesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetNewMessagesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public System.Collections.ObjectModel.ObservableCollection<WPClient.MMProgService.MyMessageDTO> Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((System.Collections.ObjectModel.ObservableCollection<WPClient.MMProgService.MyMessageDTO>)(this.results[0]));
+            }
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -128,6 +137,12 @@ namespace WPClient.MMProgService {
         private EndOperationDelegate onEndSendMessageToServerDelegate;
         
         private System.Threading.SendOrPostCallback onSendMessageToServerCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetNewMessagesDelegate;
+        
+        private EndOperationDelegate onEndGetNewMessagesDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetNewMessagesCompletedDelegate;
         
         private BeginOperationDelegate onBeginOpenDelegate;
         
@@ -184,6 +199,8 @@ namespace WPClient.MMProgService {
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> SendMessageToServerCompleted;
         
+        public event System.EventHandler<GetNewMessagesCompletedEventArgs> GetNewMessagesCompleted;
+        
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> CloseCompleted;
@@ -231,6 +248,54 @@ namespace WPClient.MMProgService {
             }
             base.InvokeAsync(this.onBeginSendMessageToServerDelegate, new object[] {
                         message}, this.onEndSendMessageToServerDelegate, this.onSendMessageToServerCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult WPClient.MMProgService.IMMProgService.BeginGetNewMessages(System.Nullable<System.Guid> lastGuid, int maxnum, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetNewMessages(lastGuid, maxnum, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Collections.ObjectModel.ObservableCollection<WPClient.MMProgService.MyMessageDTO> WPClient.MMProgService.IMMProgService.EndGetNewMessages(System.IAsyncResult result) {
+            return base.Channel.EndGetNewMessages(result);
+        }
+        
+        private System.IAsyncResult OnBeginGetNewMessages(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            System.Nullable<System.Guid> lastGuid = ((System.Nullable<System.Guid>)(inValues[0]));
+            int maxnum = ((int)(inValues[1]));
+            return ((WPClient.MMProgService.IMMProgService)(this)).BeginGetNewMessages(lastGuid, maxnum, callback, asyncState);
+        }
+        
+        private object[] OnEndGetNewMessages(System.IAsyncResult result) {
+            System.Collections.ObjectModel.ObservableCollection<WPClient.MMProgService.MyMessageDTO> retVal = ((WPClient.MMProgService.IMMProgService)(this)).EndGetNewMessages(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetNewMessagesCompleted(object state) {
+            if ((this.GetNewMessagesCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetNewMessagesCompleted(this, new GetNewMessagesCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetNewMessagesAsync(System.Nullable<System.Guid> lastGuid, int maxnum) {
+            this.GetNewMessagesAsync(lastGuid, maxnum, null);
+        }
+        
+        public void GetNewMessagesAsync(System.Nullable<System.Guid> lastGuid, int maxnum, object userState) {
+            if ((this.onBeginGetNewMessagesDelegate == null)) {
+                this.onBeginGetNewMessagesDelegate = new BeginOperationDelegate(this.OnBeginGetNewMessages);
+            }
+            if ((this.onEndGetNewMessagesDelegate == null)) {
+                this.onEndGetNewMessagesDelegate = new EndOperationDelegate(this.OnEndGetNewMessages);
+            }
+            if ((this.onGetNewMessagesCompletedDelegate == null)) {
+                this.onGetNewMessagesCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetNewMessagesCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetNewMessagesDelegate, new object[] {
+                        lastGuid,
+                        maxnum}, this.onEndGetNewMessagesDelegate, this.onGetNewMessagesCompletedDelegate, userState);
         }
         
         private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState) {
@@ -319,6 +384,20 @@ namespace WPClient.MMProgService {
             public void EndSendMessageToServer(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 base.EndInvoke("SendMessageToServer", _args, result);
+            }
+            
+            public System.IAsyncResult BeginGetNewMessages(System.Nullable<System.Guid> lastGuid, int maxnum, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[2];
+                _args[0] = lastGuid;
+                _args[1] = maxnum;
+                System.IAsyncResult _result = base.BeginInvoke("GetNewMessages", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public System.Collections.ObjectModel.ObservableCollection<WPClient.MMProgService.MyMessageDTO> EndGetNewMessages(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                System.Collections.ObjectModel.ObservableCollection<WPClient.MMProgService.MyMessageDTO> _result = ((System.Collections.ObjectModel.ObservableCollection<WPClient.MMProgService.MyMessageDTO>)(base.EndInvoke("GetNewMessages", _args, result)));
+                return _result;
             }
         }
     }
