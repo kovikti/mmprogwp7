@@ -8,7 +8,7 @@ using System.Windows;
 using System.ComponentModel;
 using WPClient.MMProgService;
 
-namespace WPFServer
+namespace WPClient
 {
     public class MyMessageSL: INotifyPropertyChanged //DependencyObject
     {
@@ -18,7 +18,7 @@ namespace WPFServer
             this.Owner = "Owner";
             //TODO
             //this.Image = new BitmapImage(new Uri("def.jpg",UriKind.RelativeOrAbsolute));
-            this.id = new Guid();
+            this.id = Guid.NewGuid();
         }
 
         public MyMessageSL(MyMessageDTO orig)

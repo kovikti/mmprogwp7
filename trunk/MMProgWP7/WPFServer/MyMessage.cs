@@ -17,7 +17,7 @@ namespace WPFServer
             this.Text = "Text";
             this.Owner = "Owner";
             this.Image = new BitmapImage(new Uri("def.jpg",UriKind.RelativeOrAbsolute));
-            this.id = new Guid();
+            this.id = Guid.NewGuid();
         }
 
         public MyMessage(MyMessageDTO orig)

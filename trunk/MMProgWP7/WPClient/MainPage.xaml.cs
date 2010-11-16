@@ -28,6 +28,7 @@ namespace WPClient
            
         }
 
+        Guid? lastReceivedGuid = null;
  
 
         void client_SendMessageToServerCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
@@ -84,7 +85,10 @@ namespace WPClient
 
                 MMProgServiceClient client = new MMProgServiceClient();
                 client.SendMessageToServerCompleted += new EventHandler<System.ComponentModel.AsyncCompletedEventArgs>(client_SendMessageToServerCompleted);
-                client.SendMessageToServerAsync(new MyMessageDTO() { Owner = tbName.Text, Text = tbMessage.Text, ImageData=data });
+                MyMessageDTO dto = new MyMessageDTO() { Owner = tbName.Text, Text = tbMessage.Text, ImageData = data };
+                //TODO do this automatically! Maybe construct MyMessageSL ad convert it to MyMessageDTO??
+                dto.Id = Guid.NewGuid();
+                client.SendMessageToServerAsync(dto);
                 
             }
         }
@@ -109,12 +113,35 @@ namespace WPClient
             
             MMProgServiceClient client = new MMProgServiceClient();
             client.SendMessageToServerCompleted += new EventHandler<System.ComponentModel.AsyncCompletedEventArgs>(client_SendMessageToServerCompleted);
-            client.SendMessageToServerAsync(new MyMessageDTO() { Owner = tbName.Text, Text = tbMessage.Text, ImageData = imgdata });
+            MyMessageDTO dto = new MyMessageDTO() { Owner = tbName.Text, Text = tbMessage.Text, ImageData = imgdata };
+            //TODO do this automatically! Maybe construct MyMessageSL ad convert it to MyMessageDTO??
+            dto.Id = Guid.NewGuid();
+            //MyMessageSL dto = new MyMessageSL() { Owner = tbName.Text, Text = tbMessage.Text, ImageData = imgdata };
+            client.SendMessageToServerAsync(dto);
             
 
             
             
 
+        }
+
+        private void button3_Click(object sender, RoutedEventArgs e)
+        {
+            MMProgServiceClient client = new MMProgServiceClient();
+            client.GetNewMessagesCompleted += new EventHandler<GetNewMessagesCompletedEventArgs>(client_GetNewMessagesCompleted);
+            client.GetNewMessagesAsync(lastReceivedGuid, 5);
+            
+        }
+
+        void client_GetNewMessagesCompleted(object sender, GetNewMessagesCompletedEventArgs e)
+        {
+            foreach (var item in e.Result)
+            {
+                MyMessageSL mymsg = new MyMessageSL(item);
+                listBox1.Items.Add(mymsg);
+                lastReceivedGuid = mymsg.Id;
+            }
+            
         }
     }
 }

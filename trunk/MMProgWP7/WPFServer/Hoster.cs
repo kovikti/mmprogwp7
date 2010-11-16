@@ -65,12 +65,14 @@ namespace WPFServer
                 int i=dtoList.Count-1;
                 while (i >= 0 && id != dtoList[i].Id && n < maxnum)
                 {
+                    //TODO resample? here or earlier when received!
                     list.Add(dtoList[i]);
                     n++;
                     i--;
                 }
 
             }
+            list.Reverse();
             return list;
 
         }
