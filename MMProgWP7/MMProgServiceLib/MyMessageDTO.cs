@@ -10,10 +10,7 @@ namespace MMProgServiceLib
     [DataContract]
     public class MyMessageDTO
     {
-        public MyMessageDTO()
-        {
-            id = new Guid();//is it Guid.NewGuid()?
-        }
+       
         string owner;
         string text;
         byte[] imageData;
