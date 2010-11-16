@@ -109,7 +109,7 @@ namespace WPClient
             
             MMProgServiceClient client = new MMProgServiceClient();
             client.SendMessageToServerCompleted += new EventHandler<System.ComponentModel.AsyncCompletedEventArgs>(client_SendMessageToServerCompleted);
-            client.SendMessageToServerAsync(new MyMessageDTO() { Owner = tbName.Text, Text = tbMessage.Text, ImageData = imgdata, Rotation = 0 });
+            client.SendMessageToServerAsync(new MyMessageDTO() { Owner = tbName.Text, Text = tbMessage.Text, ImageData = imgdata });
             
 
             
