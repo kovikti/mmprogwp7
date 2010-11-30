@@ -13,8 +13,10 @@ using Microsoft.Phone.Controls;
 using WPClient.MMProgService;
 using Microsoft.Phone.Tasks;
 using System.IO;
+using System.IO.IsolatedStorage;
 using System.Threading;
 using Microsoft.Devices.Sensors;
+using Microsoft.Phone;
 
 
 namespace WPClient
@@ -25,7 +27,7 @@ namespace WPClient
         public MainPage()
         {
             InitializeComponent();
-           
+      
         }
 
         Guid? lastReceivedGuid = null;
@@ -77,18 +79,34 @@ namespace WPClient
                         rotate = 270;
                 }*/
 
-                int angle = ImageHelper.GetAngleFromJpegStream(e.ChosenPhoto);//HACK HERE!!!
-                MemoryStream s = ImageHelper.ResampleRotateBitmapStream(e.ChosenPhoto, angle, 640, 70);
-                byte[] data = s.ToArray();
-                s.Close();
-                int rotate = 0;
+                App.CapturedImage = PictureDecoder.DecodeJpeg(e.ChosenPhoto);
 
-                MMProgServiceClient client = new MMProgServiceClient();
-                client.SendMessageToServerCompleted += new EventHandler<System.ComponentModel.AsyncCompletedEventArgs>(client_SendMessageToServerCompleted);
-                MyMessageDTO dto = new MyMessageDTO() { Owner = tbName.Text, Text = tbMessage.Text, ImageData = data };
-                //TODO do this automatically! Maybe construct MyMessageSL ad convert it to MyMessageDTO??
-                dto.Id = Guid.NewGuid();
-                client.SendMessageToServerAsync(dto);
+
+                using (IsolatedStorageFile storage = IsolatedStorageFile.GetUserStoreForApplication())
+                {
+                    //int angle = ImageHelper.GetAngleFromJpegStream(e.ChosenPhoto);//HACK HERE!!!
+                    //MemoryStream s = ImageHelper.ResampleRotateBitmapStream(e.ChosenPhoto, angle, 640, 70);
+                    //byte[] data = s.ToArray();
+                    //s.Close();
+                    
+                    
+                    //MyMessageDTO dto = new MyMessageDTO() { Owner = tbName.Text, Text = tbMessage.Text, ImageData = data };
+                    ////TODO do this automatically! Maybe construct MyMessageSL ad convert it to MyMessageDTO??
+                    //dto.Id = Guid.NewGuid();
+                    //IsolatedStorageFileStream location = new IsolatedStorageFileStream(dto.Id.ToString(), System.IO.FileMode.Create, storage);
+                    //System.IO.StreamWriter file = new System.IO.StreamWriter(location);
+
+
+                    string name = tbName.Text;
+                    string text = tbMessage.Text;
+                    NavigationService.Navigate(new Uri("/PreviewPage.xaml?PreviewType=Preview&name=" + name + "&Text=" + text, UriKind.Relative));
+                }
+                //MMProgServiceClient client = new MMProgServiceClient();
+                //client.SendMessageToServerCompleted += new EventHandler<System.ComponentModel.AsyncCompletedEventArgs>(client_SendMessageToServerCompleted);
+                //MyMessageDTO dto = new MyMessageDTO() { Owner = tbName.Text, Text = tbMessage.Text, ImageData = data };
+                ////TODO do this automatically! Maybe construct MyMessageSL ad convert it to MyMessageDTO??
+                //dto.Id = Guid.NewGuid();
+                //client.SendMessageToServerAsync(dto);
                 
             }
         }
