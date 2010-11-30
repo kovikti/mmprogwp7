@@ -12,6 +12,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using System.Windows.Media.Imaging;
 
 namespace WPClient
 {
@@ -23,6 +24,8 @@ namespace WPClient
         /// <returns>The root frame of the Phone Application.</returns>
         public PhoneApplicationFrame RootFrame { get; private set; }
 
+        public static WriteableBitmap CapturedImage;
+
         /// <summary>
         /// Constructor for the Application object.
         /// </summary>
@@ -30,6 +33,7 @@ namespace WPClient
         {
             // Global handler for uncaught exceptions. 
             UnhandledException += Application_UnhandledException;
+
 
             // Show graphics profiling information while debugging.
             if (System.Diagnostics.Debugger.IsAttached)
@@ -109,7 +113,7 @@ namespace WPClient
 
             // Create the frame but don't set it as RootVisual yet; this allows the splash
             // screen to remain active until the application is ready to render.
-            RootFrame = new PhoneApplicationFrame();
+            RootFrame = new TransitionFrame();
             RootFrame.Navigated += CompleteInitializePhoneApplication;
 
             // Handle navigation failures
