@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Windows.Media.Imaging;
+using System.Collections.ObjectModel;
 
 namespace WPClient
 {
@@ -25,6 +26,8 @@ namespace WPClient
         public PhoneApplicationFrame RootFrame { get; private set; }
 
         public static WriteableBitmap CapturedImage;
+
+        public static ObservableCollection<MyMessageSL> Favs; 
 
         /// <summary>
         /// Constructor for the Application object.
@@ -115,6 +118,8 @@ namespace WPClient
             // screen to remain active until the application is ready to render.
             RootFrame = new TransitionFrame();
             RootFrame.Navigated += CompleteInitializePhoneApplication;
+
+            Favs = new ObservableCollection<MyMessageSL>();
 
             // Handle navigation failures
             RootFrame.NavigationFailed += RootFrame_NavigationFailed;

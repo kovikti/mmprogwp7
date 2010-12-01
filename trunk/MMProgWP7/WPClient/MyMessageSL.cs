@@ -31,6 +31,13 @@ namespace WPClient
            // this.Image = new BitmapImage(new Uri("def.jpg", UriKind.RelativeOrAbsolute));
         }
 
+        public MyMessageSL(string owner, string text, BitmapImage image)
+        {
+            this.owner = owner;
+            this.text = text;
+            this.image = image;
+        }
+
 
         string owner;
         string text;
