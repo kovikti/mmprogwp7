@@ -100,8 +100,13 @@ namespace WPClient
                     previewType = NavigationContext.QueryString.Values.First();
                     userName = NavigationContext.QueryString.Values.ToArray()[1];
                     TextSource = NavigationContext.QueryString.Values.ToArray()[2];
-                    int angle = ImageHelper.GetAngleFromJpegImage(App.CapturedImage);//HACK HERE!!!
-                    img = ImageHelper.ResampleRotateBitmapToBitmap(App.CapturedImage, angle, 640, 70);
+                    if (previewType == "Preview")
+                    {
+                        int angle = ImageHelper.GetAngleFromJpegImage(App.CapturedImage);//HACK HERE!!!
+                        img = ImageHelper.ResampleRotateBitmapToBitmap(App.CapturedImage, angle, 640, 70);
+                    }
+                    else
+                        img = App.CapturedImage;
                     LayoutRoot.DataContext = this;
                 }
             };
@@ -139,12 +144,8 @@ namespace WPClient
 
         private void AddToFavsButton_Click(object sender, EventArgs e)
         {
-            BitmapImage bmp = new BitmapImage();  
-            MemoryStream ms = new MemoryStream(); 
-            img.SaveJpeg(ms, (int)img.PixelWidth, (int)img.PixelHeight, 0, 100);
-            bmp.SetSource(ms);
 
-            App.Favs.Add(new MyMessageSL(UserName , TextPreview.Text, bmp));
+            App.Favs.Add(new MyMessageSL(UserName , TextPreview.Text, img));
             MessageBox.Show("This Message has been added to favorites!");
             //TODO actually add it to favorites
         }
@@ -162,6 +163,8 @@ namespace WPClient
             dto.Id = Guid.NewGuid();
             ////TODO do this automatically! Maybe construct MyMessageSL ad convert it to MyMessageDTO??
             client.SendMessageToServerAsync(dto);
+            MessageBox.Show("Message sent!");
+            NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
         }
 
         void client_SendMessageToServerCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)

@@ -38,6 +38,17 @@ namespace WPClient
             this.image = image;
         }
 
+        public MyMessageSL(string owner, string text, WriteableBitmap wbImage)
+        {
+            this.owner = owner;
+            this.text = text;
+            BitmapImage bmp = new BitmapImage();
+            MemoryStream ms = new MemoryStream();
+            wbImage.SaveJpeg(ms, (int)wbImage.PixelWidth, (int)wbImage.PixelHeight, 0, 100);
+            bmp.SetSource(ms);
+            this.Image = bmp;
+        }
+
 
         string owner;
         string text;

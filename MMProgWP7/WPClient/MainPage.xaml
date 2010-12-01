@@ -76,11 +76,12 @@
     					</ListBox.ItemTemplate>
     				</ListBox>
     				<Button Content="Load from server" Height="72" HorizontalAlignment="Left" Margin="0,535,0,0" x:Name="button3" VerticalAlignment="Top" Width="270" Click="button3_Click" />
+    				<Button x:Name="buttonDetails" Content="Details" HorizontalAlignment="Right" Margin="0" VerticalAlignment="Bottom" Click="buttonDetails_Click"/>
     			</Grid>
     		</controls:PivotItem>
     		<controls:PivotItem x:Name="PItemFavs" Header="favs">
     			<Grid x:Name="FavsGrid">
-                    <ListBox x:Name="FavsList">
+                    <ListBox x:Name="FavsList" Margin="0,0,0,82">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <StackPanel Orientation="Vertical"/>
@@ -98,6 +99,8 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
+                    <Button x:Name="buttonRemove" HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Delete" Margin="40,0,0,0" Click="buttonRemove_Click"/>
+                    <Button x:Name="buttonFavsDetails" Content="Details" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,40,0" Click="buttonFavsDetails_Click"/>
                 </Grid>
     		</controls:PivotItem>
     		<controls:PivotItem x:Name="PItemSettings" Header="settings">
