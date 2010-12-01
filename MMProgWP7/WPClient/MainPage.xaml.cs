@@ -27,7 +27,7 @@ namespace WPClient
         public MainPage()
         {
             InitializeComponent();
-      
+            FavsList.ItemsSource = App.Favs;      
         }
 
         Guid? lastReceivedGuid = null;
@@ -161,5 +161,6 @@ namespace WPClient
             }
             
         }
+        
     }
 }

@@ -45,7 +45,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-    	<controls:Pivot x:Name="MainPivot" Margin="0" Grid.Row="1" Title="Multimedia Programming" VerticalAlignment="Top">
+    	<controls:Pivot x:Name="MainPivot" Margin="0" Grid.Row="1" Title="Multimedia Programming">
     		<controls:PivotItem x:Name="PItemSender" Header="create">
 <!--ContentPanel - place additional content here-->
     			<Grid x:Name="SenderGrid">
@@ -79,7 +79,26 @@
     			</Grid>
     		</controls:PivotItem>
     		<controls:PivotItem x:Name="PItemFavs" Header="favs">
-    			<Grid x:Name="FavsGrid"/>
+    			<Grid x:Name="FavsGrid">
+                    <ListBox x:Name="FavsList">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="{Binding Image}" Margin="2" Stretch="Uniform" Width="133" Height="100" />
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock Text="{Binding Owner}" Margin="2"/>
+                                        <TextBlock Text="{Binding Text}" Margin="2"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
     		</controls:PivotItem>
     		<controls:PivotItem x:Name="PItemSettings" Header="settings">
     			<Grid x:Name="SettingsGrid">

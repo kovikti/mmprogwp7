@@ -139,6 +139,12 @@ namespace WPClient
 
         private void AddToFavsButton_Click(object sender, EventArgs e)
         {
+            BitmapImage bmp = new BitmapImage();  
+            MemoryStream ms = new MemoryStream(); 
+            img.SaveJpeg(ms, (int)img.PixelWidth, (int)img.PixelHeight, 0, 100);
+            bmp.SetSource(ms);
+
+            App.Favs.Add(new MyMessageSL(UserName , TextPreview.Text, bmp));
             MessageBox.Show("This Message has been added to favorites!");
             //TODO actually add it to favorites
         }
