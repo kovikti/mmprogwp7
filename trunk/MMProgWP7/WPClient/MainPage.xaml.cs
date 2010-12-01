@@ -161,6 +161,43 @@ namespace WPClient
             }
             
         }
+
+        private void buttonDetails_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (listBox1.SelectedItem != null)
+            {
+                MyMessageSL message = (listBox1.SelectedItem as MyMessageSL);
+                App.CapturedImage = new System.Windows.Media.Imaging.WriteableBitmap(message.Image);
+                NavigationService.Navigate(new Uri("/PreviewPage.xaml?PreviewType=Details&name=" + message.Owner + "&Text=" + message.Text, UriKind.Relative));
+            }
+            else
+                MessageBox.Show("Please select an item in the list above");
+        	// TODO: Add event handler implementation here.
+        }
+
+        private void buttonRemove_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+            if (FavsList.SelectedItem != null)
+            {
+                MyMessageSL message = (FavsList.SelectedItem as MyMessageSL);
+                App.Favs.Remove(message);
+            }
+            else
+                MessageBox.Show("Please select an item in the list above");
+        }
+
+        private void buttonFavsDetails_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (FavsList.SelectedItem != null)
+            {
+                MyMessageSL message = (FavsList.SelectedItem as MyMessageSL);
+                App.CapturedImage = new System.Windows.Media.Imaging.WriteableBitmap(message.Image);
+                NavigationService.Navigate(new Uri("/PreviewPage.xaml?PreviewType=Favorite&name=" + message.Owner + "&Text=" + message.Text, UriKind.Relative));
+            }
+            else
+                MessageBox.Show("Please select an item in the list above");
+        }
         
     }
 }
