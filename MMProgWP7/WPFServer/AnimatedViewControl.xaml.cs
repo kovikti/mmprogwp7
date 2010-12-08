@@ -117,7 +117,7 @@ namespace WPFServer
              if (sb == null)
              {
                  sb = (Storyboard)(list[r.Next(0, list.Count)]);
-
+                 //sb = (Storyboard)(list[list.Count-1]);
                  if (sb != null)
                      sb.Begin(this);
              }
@@ -136,8 +136,95 @@ namespace WPFServer
                 sb = null;
             }
 
-            OldImageMesh.Positions = CalcXY(0, 0, -1000000);
+            
 
+            OldImageMesh.Positions = CalcXY(0, 0, 1000000);
+            AddOldGeometryToList();
+        }
+
+        List<GeometryModel3D> historylist = new List<GeometryModel3D>();
+
+        private void AddOldGeometryToList()
+        {
+
+            
+            MeshGeometry3D geo = new MeshGeometry3D();
+            //geo.Positions = new Point3DCollection();
+            //geo.Positions.Add(new Point3D(0, 0, 0));
+            //geo.Positions.Add(new Point3D(0, 1, 0));
+            //geo.Positions.Add(new Point3D(1, 1, 0));
+            //geo.Positions.Add(new Point3D(1, 0, 0));
+            geo.Positions = CalcXY(BrushWidth, BrushHeight, -1);
+            //geo.TriangleIndices = new Int32Collection();
+            geo.TriangleIndices.Add(2);
+            geo.TriangleIndices.Add(1);
+            geo.TriangleIndices.Add(0);
+            geo.TriangleIndices.Add(3);
+            geo.TriangleIndices.Add(2);
+            geo.TriangleIndices.Add(0);
+            geo.Normals.Add(new Vector3D(0, 0, 1));
+            geo.Normals.Add(new Vector3D(0, 0, 1));
+            geo.TextureCoordinates.Add(new Point(0, 1));
+            geo.TextureCoordinates.Add(new Point(0, 0));
+            geo.TextureCoordinates.Add(new Point(1, 0));
+            geo.TextureCoordinates.Add(new Point(1, 1));
+
+
+
+            DiffuseMaterial mat = new DiffuseMaterial(OldDiffuseMaterial.Brush);
+            mat.Brush.Opacity =0.5;
+            //mat.Brush = new SolidColorBrush(Colors.Wheat);
+         
+           
+
+            GeometryModel3D model = new GeometryModel3D(geo, mat);
+           
+
+
+             historylist.Insert(0,model);
+            
+            //model3DGroup.Children.Add(model);
+            while (historylist.Count > 5)
+            {
+                historylist.RemoveAt(historylist.Count - 1);
+            }
+            for (int i = 0; i < historylist.Count; i++)
+            {
+                double ofset = 1.2;
+                
+                RotateTransform3D rot = new RotateTransform3D(new AxisAngleRotation3D(new Vector3D(0, 1, 0), +30));//-20
+                TranslateTransform3D tt1 = new TranslateTransform3D(0,0, -0.1-i*ofset);//1, 0.5+i*ofset, +2+i*ofset); -0.5-i*ofset
+                Transform3DGroup trg = new Transform3DGroup();
+                TranslateTransform3D tt2 = new TranslateTransform3D(+1.2, 0, 0);//-0.5
+                trg.Children.Add(tt1);
+                trg.Children.Add(rot);
+                trg.Children.Add(tt2);
+                
+                
+
+                historylist[i].Transform=trg;
+                
+                //model3DGroup.Children.RemoveAt(2+i);//.Remove((Model3D)historylist[i]);
+
+                
+
+            }
+            //model3DGroup.Children.Add(historylist[0]);
+            model3DGroup.Children.Clear();
+            for (int i = 0; i < historylist.Count; i++)
+            {
+                if (i < 5)
+                {
+                    model3DGroup.Children.Add(historylist[i]);
+                }
+            }
+            model3DGroup.Children.Add(new AmbientLight(Colors.White));
+            model3DGroup.Children.Add(OldModel);
+            model3DGroup.Children.Add(NewModel);
+            //OldImageMesh.Positions = CalcXY(BrushWidth, BrushHeight, -100);
+            //NewImageMesh.Positions = CalcXY(BrushWidth, BrushHeight, -100);
+            
+            
         }
 
         private void viewPort_SizeChanged(object sender, SizeChangedEventArgs e)

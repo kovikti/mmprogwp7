@@ -9,7 +9,7 @@
     <UserControl.Resources>
         <coll:ArrayList x:Key="Storyboards" x:Name="Storyboards">
             <Storyboard  Completed="Storyboard_Completed" FillBehavior="Stop">
-                <!---->
+              
                 <Rotation3DAnimation 
                 FillBehavior="Stop"
                 Storyboard.TargetName="OldImageRotate" 
@@ -29,11 +29,17 @@
                     To="0"
                     BeginTime="0:0:0.5"
                     Duration="0:0:0.5"/>
+                <DoubleAnimation
+                    Storyboard.TargetName="NewImageTranslate"
+                    Storyboard.TargetProperty="OffsetX"
+                    From="-2"
+                    To="0"
+                    Duration="0:0:1.0" />
                            
             </Storyboard>
             
             
-            <Storyboard  Completed="Storyboard_Completed" FillBehavior="Stop"><!---->
+            <!--<Storyboard  Completed="Storyboard_Completed" FillBehavior="Stop">
                 <Rotation3DAnimation 
                     FillBehavior="Stop"
                 Storyboard.TargetName="OldImageRotate" 
@@ -59,7 +65,27 @@
                     To="0"
                     BeginTime="0:0:0.5"
                     Duration="0:0:0.5"/>
+            </Storyboard>-->
+
+            <Storyboard  Completed="Storyboard_Completed" FillBehavior="Stop">
+                <!---->
+                
+               
+                <DoubleAnimation
+                    Storyboard.TargetName="OldImageTranslate"
+                    Storyboard.TargetProperty="OffsetY"
+                    From="0"
+                    To="2"
+                    Duration="0:0:1.0" />
+                <DoubleAnimation
+                    Storyboard.TargetName="NewImageTranslate"
+                    Storyboard.TargetProperty="OffsetX"
+                    From="2"
+                    To="0"
+                    Duration="0:0:1.0" />
             </Storyboard>
+            
+            
             <Storyboard  Completed="Storyboard_Completed" FillBehavior="Stop">
                 <Rotation3DAnimation 
                 Storyboard.TargetName="OldImageRotate" 
@@ -91,6 +117,18 @@
                     To="0"
                     BeginTime="0:0:0.5"
                     Duration="0:0:0.5"/>
+                 <DoubleAnimation
+                    Storyboard.TargetName="NewImageTranslate"
+                    Storyboard.TargetProperty="OffsetX"
+                    From="2"
+                    To="0"
+                    Duration="0:0:1.0" />
+                <DoubleAnimation
+                    Storyboard.TargetName="NewImageTranslate"
+                    Storyboard.TargetProperty="OffsetY"
+                    From="2"
+                    To="0"
+                    Duration="0:0:1.0" />
             </Storyboard>
             <Storyboard Completed="Storyboard_Completed" FillBehavior="Stop">
                 <Rotation3DAnimation 
@@ -134,6 +172,12 @@
                     To="0"
                     BeginTime="0:0:0.5"
                     Duration="0:0:0.5"/>
+                 <DoubleAnimation
+                    Storyboard.TargetName="NewImageTranslate"
+                    Storyboard.TargetProperty="OffsetX"
+                    From="2"
+                    To="0"
+                    Duration="0:0:1.0" />
             </Storyboard>
 
 
@@ -151,6 +195,18 @@
                     To="0"
                     BeginTime="0:0:0.5"
                     Duration="0:0:0.5"/>
+                 <DoubleAnimation
+                    Storyboard.TargetName="NewImageTranslate"
+                    Storyboard.TargetProperty="OffsetX"
+                    From="-2"
+                    To="0"
+                    Duration="0:0:1.0" />
+                <DoubleAnimation
+                    Storyboard.TargetName="NewImageTranslate"
+                    Storyboard.TargetProperty="OffsetY"
+                    From="-2"
+                    To="0"
+                    Duration="0:0:1.0" />
             </Storyboard>
             <!---->
             
@@ -174,7 +230,8 @@
                     To="0"
                     BeginTime="0:0:0.5"
                     Duration="0:0:0.5"/>
-               <Rotation3DAnimation 
+                   
+                    <Rotation3DAnimation 
                 Storyboard.TargetName="OldImageRotate" 
                 Storyboard.TargetProperty="Rotation"
                 Duration="0:0:1.0" >
@@ -192,7 +249,19 @@
                     To="0"
                     BeginTime="0:0:0.5"
                     Duration="0:0:0.5"/>
-            </Storyboard>    
+                <DoubleAnimation
+                    Storyboard.TargetName="NewImageTranslate"
+                    Storyboard.TargetProperty="OffsetX"
+                    From="-2"
+                    To="0"
+                    Duration="0:0:1.0" />
+                    <DoubleAnimation
+                    Storyboard.TargetName="NewImageTranslate"
+                    Storyboard.TargetProperty="OffsetY"
+                    From="-2"
+                    To="0"
+                    Duration="0:0:1.0" />
+                </Storyboard>    
             
               <Storyboard  Completed="Storyboard_Completed" FillBehavior="Stop">
                
@@ -212,39 +281,66 @@
                     <Rotation3DAnimation.To>
                         <AxisAngleRotation3D Axis="0,00,-1" Angle="1000"/>
                     </Rotation3DAnimation.To>
-                </Rotation3DAnimation>  
-                  <!--<DoubleAnimation 
+                </Rotation3DAnimation>
+                    <DoubleAnimation
+                    Storyboard.TargetName="NewImageTranslate"
+                    Storyboard.TargetProperty="OffsetY"
+                    From="-2"
+                    To="0"
+                    Duration="0:0:1.0" />
+                    <!--<DoubleAnimation 
                     Storyboard.TargetName="OldDiffuseMaterial"
                     Storyboard.TargetProperty="Brush.Opacity"
                     From="1"
                     To="0"
                     BeginTime="0:0:0.5"
                     Duration="0:0:0.5"/>-->
-            </Storyboard>         
-            
-            
-              <Storyboard  Completed="Storyboard_Completed" FillBehavior="Stop">
-             
-              <!--<DoubleAnimation 
-                    Storyboard.TargetName="OldImageBrush"
-                    Storyboard.TargetProperty="Opacity"
-                    From="1"
-                    To="0"
-                    BeginTime="0:0:0.0"
-                    Duration="0:0:1.0"/>
-               <DoubleAnimation 
-                    Storyboard.TargetName="NewImageBrush"
-                    Storyboard.TargetProperty="Opacity"
-                    From="0"
-                    To="1"
-                    BeginTime="0:0:0.0"
-                    Duration="0:0:1.0"/>-->
-                <!--<DoubleAnimation
-                    Storyboard.TargetName="NewImageTranslate"
+            </Storyboard>
+
+
+            <Storyboard  Completed="Storyboard_Completed" FillBehavior="Stop">
+               
+                <DoubleAnimation
+                    Storyboard.TargetName="OldImageTranslate"
                     Storyboard.TargetProperty="OffsetZ"
                     From="0"
-                    To="-0.0001"
-                    Duration="0:0:0.0" />-->
+                    To="1"
+                    Duration="0:0:1.0" />
+                <Rotation3DAnimation 
+                Storyboard.TargetName="OldImageRotate" 
+                Storyboard.TargetProperty="Rotation"
+                BeginTime="0:0:0.0"
+                Duration="0:0:0.5" >
+                    <Rotation3DAnimation.From>
+                        <AxisAngleRotation3D Axis="0,00,-1" Angle="0"/>
+                    </Rotation3DAnimation.From>
+                    <Rotation3DAnimation.To>
+                        <AxisAngleRotation3D Axis="0,00,-1" Angle="179"/>
+                    </Rotation3DAnimation.To>
+                </Rotation3DAnimation>
+                <Rotation3DAnimation 
+                Storyboard.TargetName="OldImageRotate" 
+                Storyboard.TargetProperty="Rotation"
+                BeginTime="0:0:0.5"
+                Duration="0:0:0.5" >
+                    <Rotation3DAnimation.From>
+                        <AxisAngleRotation3D Axis="0,00,-1" Angle="180"/>
+                    </Rotation3DAnimation.From>
+                    <Rotation3DAnimation.To>
+                        <AxisAngleRotation3D Axis="0,00,-1" Angle="-2"/>
+                    </Rotation3DAnimation.To>
+                </Rotation3DAnimation>
+                    <DoubleAnimation
+                    Storyboard.TargetName="NewImageTranslate"
+                    Storyboard.TargetProperty="OffsetX"
+                    From="-2"
+                    To="0"
+                    Duration="0:0:1.0" />
+                </Storyboard>
+
+            <!--<Storyboard  Completed="Storyboard_Completed" FillBehavior="Stop">
+             
+            
                 <DoubleAnimation 
                     Storyboard.TargetName="OldDiffuseMaterial"
                     Storyboard.TargetProperty="Brush.Opacity"
@@ -259,22 +355,21 @@
                     To="1"
                     BeginTime="0:0:0.0"
                     Duration="0:0:1.0"/>
-            </Storyboard>              
+            </Storyboard>-->              
 
         </coll:ArrayList>
             
     </UserControl.Resources>
     <Grid>
         <Viewport3D x:Name="viewPort" SizeChanged="viewPort_SizeChanged">
-
             <Viewport3D.Camera>
                 <PerspectiveCamera LookDirection="0,0,-1" UpDirection="0,1,0" Position="0.0,0.0,1.207" FieldOfView="45"   />
                 <!--NearPlaneDistance="1" FarPlaneDistance="-1000"-->
             </Viewport3D.Camera>
             <ModelVisual3D>
                 <ModelVisual3D.Content>
-                    <Model3DGroup>
-                        <GeometryModel3D>
+                    <Model3DGroup x:Name="model3DGroup">
+                        <GeometryModel3D x:Name="OldModel">
                             <GeometryModel3D.Geometry>
                                 <MeshGeometry3D x:Name="OldImageMesh" Positions="0,0,0 0,1,0 1,1,0 1,0,0" 
                                                 TriangleIndices="2,1,0, 3,2,0"
@@ -306,7 +401,7 @@
                                 </Transform3DGroup>
                             </GeometryModel3D.Transform>
                         </GeometryModel3D>
-                        <GeometryModel3D>
+                        <GeometryModel3D x:Name="NewModel">
                             <GeometryModel3D.Geometry>
                                 <MeshGeometry3D x:Name="NewImageMesh" Positions="0,0,0.001 0,1,0.001 1,1,0.001 1,0,0.001" 
                                                 TriangleIndices="2,1,0, 3,2,0"

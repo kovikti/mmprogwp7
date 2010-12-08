@@ -71,7 +71,13 @@ namespace WPFServer
             //mymsg.Owner = msg.Owner;
         }
 
-
+        public void MyMeasure()
+        {
+            Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
+            Arrange(new Rect(0, 0, Width, Height));
+        }
        
     }
+
+
 }

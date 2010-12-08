@@ -52,9 +52,30 @@ namespace WPFServer
             return null;
         }
 
+        void SetNewMessageView(MyMessage msg)
+        {
+            if (msg != null)
+            {
+                MessageControl msgc = new MessageControl();
+                msgc.SetMessage(msg);
+                //msgc.Measure(new Size(300, 300));
+                //msgc.Width = animatedViewControl1.ActualWidth;
+                //msgc.Height = animatedViewControl1.ActualHeight;
+                
+                msgc.MyMeasure();
+                VisualBrush vb = new VisualBrush(msgc);
+                vb.Stretch = Stretch.Fill;
+                vb.AlignmentX = AlignmentX.Center;
+                vb.AlignmentY = AlignmentY.Center;
+                
+                //animatedViewControl1.SetNewBrush(vb, msgc.Width, msgc.Height);
+                animatedViewControl1.SetNewBrush(vb, msgc.ActualWidth, msgc.ActualHeight);
+            }
+        }
 
         void hoster_MessageReceivedEvent(MyMessageDTO obj)
         {
+            
             //KV: Is this actually they way it is usually done?
             Dispatcher.Invoke(
                 new Action(() =>
@@ -62,16 +83,21 @@ namespace WPFServer
                     MyMessage msg = new MyMessage(obj);
                     lvMessages.Items.Add(msg);
                     lvMessages.ScrollIntoView(msg);
-                    MessageControl msgc = new MessageControl();
-                    msgc.SetMessage(msg);
-                    //stackPanel1.Children.Add(msgc);
-                    //msgc.Resources["myMessageResource"] = obj;
-                    //animatedViewControl1.SetNewImage(GetBitmapOfVisual(msgc));
-                    animatedViewControl1.SetNewBrush(new VisualBrush(msgc), msgc.Width, msgc.Height);
-                    //stackPanel1.Children.Add(msgc);
-                    //image1.Source = GetBitmapOfVisual(msgc);
+                    //MessageControl msgc = new MessageControl();
+                    //msgc.SetMessage(msg);
+                    //animatedViewControl1.SetNewBrush(new VisualBrush(msgc), msgc.Width, msgc.Height);
+                    SetNewMessageView(msg);
+                   
                 }), System.Windows.Threading.DispatcherPriority.Normal);
         
+        }
+
+        private void lvMessages_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lvMessages.SelectedItem != null)
+            {
+                SetNewMessageView(lvMessages.SelectedItem as MyMessage);
+            }
         }
 
 

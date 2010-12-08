@@ -5,18 +5,23 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:my="clr-namespace:WPFServer"
              DataContext="{Binding RelativeSource={RelativeSource Self}}"
-             mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="300"
-             Width="438" Height="300">
+            
+             Width="500" Height="300"
+              ><!-- mc:Ignorable="d" 
+             d:DesignWidth="300" d:DesignHeight="300"-->
     <!--<UserControl.Resources>
         <my:MyMessage x:Key="myMessageResource"></my:MyMessage>
     </UserControl.Resources>-->
-    <DockPanel  HorizontalAlignment="Stretch" Name="stackPanel1" VerticalAlignment="Stretch" LastChildFill="True">
-        <Image  Name="image" Stretch="Uniform" Width="222" Source="{Binding Path=myMessage.Image}" />
-        <StackPanel  Name="stackPanel2">
-            <TextBlock Height="23" Name="tbOwner" Text="{Binding Path=myMessage.Owner}" /><!---->
-            <TextBlock Height="23" Name="tbText" Text="{Binding Path=myMessage.Text}" /> <!---->
-            <!--<Rectangle Width="20" Height="10" Fill="Blue"/>-->
-        </StackPanel>
+    <DockPanel Name="stackPanel1"  ><!--LastChildFill="True"-->
+        
+        <DockPanel Width="200" DockPanel.Dock="Right" Name="stackPanel2"><!-- LastChildFill="True" Width="150" DockPanel.Dock="Right"-->
+            <TextBox DockPanel.Dock="Top" Height="20" Text="From:" Background="Transparent" Foreground="White" IsReadOnly="True" BorderThickness="0" />
+            <TextBox DockPanel.Dock="Top" Height="25" Name="tbOwner" Text="{Binding Path=myMessage.Owner}" Background="Transparent"  Foreground="White" IsReadOnly="True" BorderThickness="0" />
+            <TextBox DockPanel.Dock="Top" Height="20"  Text="Message:" Background="Transparent" Foreground="White" IsReadOnly="True" BorderThickness="0" />
+            <TextBox Name="tbText" TextWrapping="Wrap" Text="{Binding Path=myMessage.Text}" Background="Transparent" Foreground="White" IsReadOnly="True" BorderThickness="0" /> <!---->
+            <!--<TextBlock  TextWrapping="Wrap" Text=" " />-->
+           
+        </DockPanel>
+        <Image DockPanel.Dock="Left" Width="300" Name="image" Stretch="Uniform"  Source="{Binding Path=myMessage.Image}" />
     </DockPanel>
 </UserControl>
