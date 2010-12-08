@@ -172,7 +172,7 @@ namespace WPFServer
 
 
             DiffuseMaterial mat = new DiffuseMaterial(OldDiffuseMaterial.Brush);
-            mat.Brush.Opacity =0.5;
+            mat.Brush.Opacity =0.4;
             //mat.Brush = new SolidColorBrush(Colors.Wheat);
          
            
@@ -184,13 +184,13 @@ namespace WPFServer
              historylist.Insert(0,model);
             
             //model3DGroup.Children.Add(model);
-            while (historylist.Count > 5)
+            while (historylist.Count > 7)
             {
                 historylist.RemoveAt(historylist.Count - 1);
             }
             for (int i = 0; i < historylist.Count; i++)
             {
-                double ofset = 1.2;
+                double ofset = 1.1;
                 
                 RotateTransform3D rot = new RotateTransform3D(new AxisAngleRotation3D(new Vector3D(0, 1, 0), +30));//-20
                 TranslateTransform3D tt1 = new TranslateTransform3D(0,0, -0.1-i*ofset);//1, 0.5+i*ofset, +2+i*ofset); -0.5-i*ofset
