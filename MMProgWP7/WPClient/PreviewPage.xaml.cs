@@ -100,13 +100,29 @@ namespace WPClient
                     previewType = NavigationContext.QueryString.Values.First();
                     userName = NavigationContext.QueryString.Values.ToArray()[1];
                     TextSource = NavigationContext.QueryString.Values.ToArray()[2];
-                    if (previewType == "Preview")
+                    switch (previewType)
                     {
-                        int angle = ImageHelper.GetAngleFromJpegImage(App.CapturedImage);//HACK HERE!!!
-                        img = ImageHelper.ResampleRotateBitmapToBitmap(App.CapturedImage, angle, 640, 70);
+                        case "Preview": 
+                             int angle = ImageHelper.GetAngleFromJpegImage(App.CapturedImage);//HACK HERE!!!
+                             img = ImageHelper.ResampleRotateBitmapToBitmap(App.CapturedImage, angle, 640, 70);
+                            break;
+                        case "Favorite":
+                            AddTofavsButton.IsEnabled = false;
+                            img = App.CapturedImage;
+                            break;
+                        case "Details":
+                            TextPreview.IsReadOnly = true;
+                            SendButton.IsEnabled = false;
+                            img = App.CapturedImage;
+                            break;
                     }
-                    else
-                        img = App.CapturedImage;
+                    //if (previewType == "Preview")
+                    //{
+                    //    int angle = ImageHelper.GetAngleFromJpegImage(App.CapturedImage);//HACK HERE!!!
+                    //    img = ImageHelper.ResampleRotateBitmapToBitmap(App.CapturedImage, angle, 640, 70);
+                    //}
+                    //else
+                    //    img = App.CapturedImage;
                     LayoutRoot.DataContext = this;
                 }
             };
