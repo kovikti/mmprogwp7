@@ -17,20 +17,26 @@ using System.IO.IsolatedStorage;
 using System.Threading;
 using Microsoft.Devices.Sensors;
 using Microsoft.Phone;
+using System.Windows.Threading;
 
 
 namespace WPClient
 {
     public partial class MainPage : PhoneApplicationPage
     {
-        public Timer timer;
+        public DispatcherTimer timer;
         // Constructor
         public MainPage()
         {
             InitializeComponent();
             FavsList.ItemsSource = App.Favs;
-            timer = new Timer(MyTimerCallback, listBox1, 0, -1);
+            timer = new DispatcherTimer();
+        
+            timer.Tick += new EventHandler(timer_Tick);
+            
         }
+
+        
 
         static Guid? lastReceivedGuid = null;
  
@@ -206,28 +212,33 @@ namespace WPClient
             PivotItem pi = (MainPivot.SelectedItem as PivotItem);
             if (pi.Name == "PItemView")
             {
-                timer.Change(0, 3000);
+                timer.Interval = TimeSpan.FromMilliseconds(100);
+                timer.Start();
             }
             else
             {
-                timer.Change(0, -1);
+                
+                timer.Stop();
             }
         }
-
-        private static void MyTimerCallback(object state)
+        void timer_Tick(object sender, EventArgs e)
         {
-            ListBox lb = (state as ListBox);
+            timer.Interval = TimeSpan.FromMilliseconds(5000);
+            ListBox lb = listBox1;
             MMProgServiceClient client = new MMProgServiceClient();
-            client.GetNewMessagesCompleted += new EventHandler<GetNewMessagesCompletedEventArgs>(delegate(object sender, GetNewMessagesCompletedEventArgs e)
+            client.GetNewMessagesCompleted += new EventHandler<GetNewMessagesCompletedEventArgs>(
+                delegate(object sender2, GetNewMessagesCompletedEventArgs e2)
+            {
+                foreach (var item in e2.Result)
                 {
-                    foreach (var item in e.Result)
-                    {
-                        MyMessageSL mymsg = new MyMessageSL(item);
-                        lb.Items.Add(mymsg);
-                        lastReceivedGuid = mymsg.Id;
-                    }
-                });
+                    MyMessageSL mymsg = new MyMessageSL(item);
+                    lb.Items.Add(mymsg);
+                    lastReceivedGuid = mymsg.Id;
+                }
+            }
+            );
             client.GetNewMessagesAsync(lastReceivedGuid, 5);
-        }      
+        }
+       
     }
 }
