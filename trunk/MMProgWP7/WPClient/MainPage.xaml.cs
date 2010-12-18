@@ -18,6 +18,7 @@ using System.Threading;
 using Microsoft.Devices.Sensors;
 using Microsoft.Phone;
 using System.Windows.Threading;
+using System.Collections.ObjectModel;
 
 
 namespace WPClient
@@ -25,12 +26,15 @@ namespace WPClient
     public partial class MainPage : PhoneApplicationPage
     {
         public DispatcherTimer timer;
+
         // Constructor
         public MainPage()
         {
             InitializeComponent();
             FavsList.ItemsSource = App.Favs;
             timer = new DispatcherTimer();
+
+            listBox1.ItemsSource = App.newMessages;
         
             timer.Tick += new EventHandler(timer_Tick);
             
@@ -232,7 +236,7 @@ namespace WPClient
                 foreach (var item in e2.Result)
                 {
                     MyMessageSL mymsg = new MyMessageSL(item);
-                    lb.Items.Add(mymsg);
+                    App.newMessages.Add(mymsg);
                     lastReceivedGuid = mymsg.Id;
                 }
             }

@@ -27,7 +27,9 @@ namespace WPClient
 
         public static WriteableBitmap CapturedImage;
 
-        public static ObservableCollection<MyMessageSL> Favs; 
+        public static ObservableCollection<MyMessageSL> Favs;
+
+        public static ObservableCollection<MyMessageSL> newMessages;
 
         /// <summary>
         /// Constructor for the Application object.
@@ -118,7 +120,7 @@ namespace WPClient
             // screen to remain active until the application is ready to render.
             RootFrame = new TransitionFrame();
             RootFrame.Navigated += CompleteInitializePhoneApplication;
-
+            newMessages = new ObservableCollection<MyMessageSL>();
             Favs = new ObservableCollection<MyMessageSL>();
 
             // Handle navigation failures
