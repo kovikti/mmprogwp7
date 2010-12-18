@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ServiceModel;
 using MMProgServiceLib;
+using System.Windows.Threading;
 
 namespace WPFServer
 {
@@ -26,9 +27,16 @@ namespace WPFServer
             InitializeComponent();
             hoster = new Hoster();
             hoster.MessageReceivedEvent += new Action<MyMessageDTO>(hoster_MessageReceivedEvent);
-
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(6);
+            timer.Tick += new EventHandler(timer_Tick);
+            //timer.Start();
         }
+        
+
+
         Hoster hoster;
+        DispatcherTimer timer;
 
         BitmapSource GetBitmapOfVisual(Visual vis)
         {
@@ -86,7 +94,10 @@ namespace WPFServer
                     //MessageControl msgc = new MessageControl();
                     //msgc.SetMessage(msg);
                     //animatedViewControl1.SetNewBrush(new VisualBrush(msgc), msgc.Width, msgc.Height);
+                    DisableRandomMessages();
+                    EnableRandomMessagesAfter(10);
                     SetNewMessageView(msg);
+
                    
                 }), System.Windows.Threading.DispatcherPriority.Normal);
         
@@ -100,6 +111,44 @@ namespace WPFServer
             }
         }
 
+
+        void timer_Tick(object sender, EventArgs e)
+        {
+            SetNewMessageView(GetRandomMessage());
+        }
+
+        MyMessage GetRandomMessage()
+        {
+            Random r = new Random();
+            int i = (int)(r.NextDouble() * lvMessages.Items.Count);
+            return (MyMessage)lvMessages.Items[i];
+        }
+
+        DispatcherTimer enableTimer;
+        void EnableRandomMessagesAfter(int seconds)
+        {
+            DisableRandomMessages();
+            enableTimer = new DispatcherTimer();
+            enableTimer.Interval = TimeSpan.FromSeconds(seconds);
+            enableTimer.Tick += new EventHandler(enableTimer_Tick);
+            enableTimer.Start();
+        }
+        void DisableRandomMessages()
+        {
+            timer.Stop();
+            if (enableTimer != null)
+            {
+                enableTimer.Stop();
+            }
+        }
+        void enableTimer_Tick(object sender, EventArgs e)
+        {
+            if (enableTimer != null)
+            {
+                enableTimer.Stop();
+            }
+            timer.Start();
+        }
 
     }
 }
