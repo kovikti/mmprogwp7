@@ -45,7 +45,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-    	<controls:Pivot x:Name="MainPivot" Margin="0" Grid.Row="1" Title="Multimedia Programming">
+    	<controls:Pivot x:Name="MainPivot" Margin="0" Grid.Row="1" Title="Multimedia Programming" SelectionChanged="MainPivot_SelectionChanged">
     		<controls:PivotItem x:Name="PItemSender" Header="create">
 <!--ContentPanel - place additional content here-->
     			<Grid x:Name="SenderGrid">
@@ -75,7 +75,7 @@
     						</DataTemplate>
     					</ListBox.ItemTemplate>
     				</ListBox>
-    				<Button Content="Load from server" Height="72" HorizontalAlignment="Left" Margin="0,535,0,0" x:Name="button3" VerticalAlignment="Top" Width="270" Click="button3_Click" />
+    				<Button Content="Load from server" Height="72" HorizontalAlignment="Left" Margin="0,535,0,0" x:Name="updateButton" VerticalAlignment="Top" Width="270" Click="button3_Click" />
     				<Button x:Name="buttonDetails" Content="Details" HorizontalAlignment="Right" Margin="0" VerticalAlignment="Bottom" Click="buttonDetails_Click"/>
     			</Grid>
     		</controls:PivotItem>

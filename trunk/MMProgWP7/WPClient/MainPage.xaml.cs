@@ -23,14 +23,16 @@ namespace WPClient
 {
     public partial class MainPage : PhoneApplicationPage
     {
+        public Timer timer;
         // Constructor
         public MainPage()
         {
             InitializeComponent();
-            FavsList.ItemsSource = App.Favs;      
+            FavsList.ItemsSource = App.Favs;
+            timer = new Timer(MyTimerCallback, listBox1, 0, -1);
         }
 
-        Guid? lastReceivedGuid = null;
+        static Guid? lastReceivedGuid = null;
  
 
         void client_SendMessageToServerCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
@@ -198,6 +200,34 @@ namespace WPClient
             else
                 MessageBox.Show("Please select an item in the list above");
         }
-        
+
+        private void MainPivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            PivotItem pi = (MainPivot.SelectedItem as PivotItem);
+            if (pi.Name == "PItemView")
+            {
+                timer.Change(0, 3000);
+            }
+            else
+            {
+                timer.Change(0, -1);
+            }
+        }
+
+        private static void MyTimerCallback(object state)
+        {
+            ListBox lb = (state as ListBox);
+            MMProgServiceClient client = new MMProgServiceClient();
+            client.GetNewMessagesCompleted += new EventHandler<GetNewMessagesCompletedEventArgs>(delegate(object sender, GetNewMessagesCompletedEventArgs e)
+                {
+                    foreach (var item in e.Result)
+                    {
+                        MyMessageSL mymsg = new MyMessageSL(item);
+                        lb.Items.Add(mymsg);
+                        lastReceivedGuid = mymsg.Id;
+                    }
+                });
+            client.GetNewMessagesAsync(lastReceivedGuid, 5);
+        }      
     }
 }
