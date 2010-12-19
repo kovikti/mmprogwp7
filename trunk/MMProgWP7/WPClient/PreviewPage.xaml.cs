@@ -155,7 +155,11 @@ namespace WPClient
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+            if (NavigationService.CanGoBack)
+                NavigationService.GoBack();
+            else
+                NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+            
         }
 
         private void AddToFavsButton_Click(object sender, EventArgs e)
