@@ -177,14 +177,18 @@ namespace WPClient
             client.SendMessageToServerCompleted += new EventHandler<System.ComponentModel.AsyncCompletedEventArgs>(client_SendMessageToServerCompleted);
             MyMessageDTO dto = new MyMessageDTO() { Owner = UserName, Text = this.TextPreview.Text , ImageData = data };
             dto.Id = Guid.NewGuid();
-            ////TODO do this automatically! Maybe construct MyMessageSL ad convert it to MyMessageDTO??
+            
             client.SendMessageToServerAsync(dto);
-            MessageBox.Show("Message sent!");
-            NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+            
+            if (NavigationService.CanGoBack)
+                NavigationService.GoBack();
+            else
+                NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
         }
 
         void client_SendMessageToServerCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
         {
+            MessageBox.Show("Message sent!");
             //TODO error handling?
             (sender as MMProgServiceClient).CloseAsync();
         }
