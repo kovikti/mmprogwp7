@@ -29,13 +29,6 @@ namespace MMProgServiceLib
         public event Action<string,object> EventFired;
 
 
-        //IList<MyMessageDTO> dtoList;
-
-        /*public void SetDTOList(IList<MyMessageDTO> list)
-        {
-            dtoList = list;
-        }*/
-
         IHoster hoster;
 
         public IHoster Hoster
@@ -44,9 +37,6 @@ namespace MMProgServiceLib
             set { hoster = value; }
         }
 
-        //public void SetHoster(IHoster ih){
-        //    hoster=ih;
-        //}
 
 
         

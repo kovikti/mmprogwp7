@@ -45,30 +45,12 @@ namespace WPFServer
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        //string test;
-        //public string Test
-        //{
-        //    get
-        //    {
-        //        return test;
-        //    }
-        //    set
-        //    {
-        //        if (test != value)
-        //        {
-        //            test = value;
-        //            NotifyPropertyChanged("Test");
-        //        }
-        //    }
-        //}
 
 
         public void SetMessage(MyMessage msg)
         {
             myMessage = msg;
-            //Test = msg.Owner;
-            //mymsg.Text = msg.Text;
-            //mymsg.Owner = msg.Owner;
+
         }
 
         public void MyMeasure()
