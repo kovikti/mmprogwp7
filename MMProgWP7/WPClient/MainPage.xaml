@@ -81,7 +81,7 @@
     		</controls:PivotItem>
     		<controls:PivotItem x:Name="PItemFavs" Header="favs">
     			<Grid x:Name="FavsGrid">
-                    <ListBox x:Name="FavsList" Margin="0,0,0,82" SelectionChanged="FavsList_SelectionChanged">
+                    <ListBox x:Name="FavsList" Margin="0,0,0,82" >
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <StackPanel Orientation="Vertical"/>

@@ -38,6 +38,13 @@ namespace WPClient
             set { myName = value; }
         }
 
+        static int selectedPivotIndex = -1;
+        public static int SelectedPivotIndex
+        {
+            get { return selectedPivotIndex; }
+            set { selectedPivotIndex = value; }
+        }
+
         /// <summary>
         /// Constructor for the Application object.
         /// </summary>

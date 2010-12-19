@@ -37,6 +37,9 @@ namespace WPClient
             listBox1.ItemsSource = App.newMessages;
 
             tbName.Text = App.MyName;
+
+            if (App.SelectedPivotIndex >= 0)
+                MainPivot.SelectedIndex = App.SelectedPivotIndex;
         
             timer.Tick += new EventHandler(timer_Tick);
             
@@ -157,8 +160,8 @@ namespace WPClient
                 App.CapturedImage = new System.Windows.Media.Imaging.WriteableBitmap(message.Image);
                 NavigationService.Navigate(new Uri("/PreviewPage.xaml?PreviewType=Details&name=" + message.Owner + "&Text=" + message.Text, UriKind.Relative));
             }
-            else
-                MessageBox.Show("Please select an item in the list above");
+            //else
+            //    MessageBox.Show("Please select an item in the list above");
         }
 
         private void buttonDetails_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -175,8 +178,8 @@ namespace WPClient
                 MyMessageSL message = (FavsList.SelectedItem as MyMessageSL);
                 App.Favs.Remove(message);
             }
-            else
-                MessageBox.Show("Please select an item in the list above");
+            //else
+            //    MessageBox.Show("Please select an item in the list above");
         }
 
         void ShowSelectedFavItemDetails()
@@ -187,8 +190,8 @@ namespace WPClient
                 App.CapturedImage = new System.Windows.Media.Imaging.WriteableBitmap(message.Image);
                 NavigationService.Navigate(new Uri("/PreviewPage.xaml?PreviewType=Favorite&name=" + message.Owner + "&Text=" + message.Text, UriKind.Relative));
             }
-            else
-                MessageBox.Show("Please select an item in the list above");
+            //else
+            //    MessageBox.Show("Please select an item in the list above");
         }
         private void buttonFavsDetails_Click(object sender, System.Windows.RoutedEventArgs e)
         {
@@ -198,6 +201,7 @@ namespace WPClient
         private void MainPivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             PivotItem pi = (MainPivot.SelectedItem as PivotItem);
+            App.SelectedPivotIndex = MainPivot.SelectedIndex;
             if (pi.Name == "PItemView")
             {
                 timer.Interval = TimeSpan.FromMilliseconds(100);
@@ -236,12 +240,10 @@ namespace WPClient
         private void listBox1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ShowSelectedItemDetails();
+            listBox1.SelectedIndex = -1;
         }
 
-        private void FavsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ShowSelectedFavItemDetails();
-        }
+       
        
     }
 }
