@@ -337,8 +337,36 @@
                     To="0"
                     Duration="0:0:1.0" />
                 </Storyboard>
+            
+            
+                <Storyboard  Completed="Storyboard_Completed" FillBehavior="Stop">
 
-            <!--<Storyboard  Completed="Storyboard_Completed" FillBehavior="Stop">
+                    <DoubleAnimation
+                    Storyboard.TargetName="OldImageTranslate"
+                    Storyboard.TargetProperty="OffsetZ"
+                    From="0"
+                    To="1"
+                    Duration="0:0:1.0" />
+                   
+                    <Rotation3DAnimation 
+                Storyboard.TargetName="OldImageRotate" 
+                Storyboard.TargetProperty="Rotation"
+                BeginTime="0:0:0.0"
+                Duration="0:0:0.25" IsCumulative="True" RepeatBehavior="4x">
+                        <Rotation3DAnimation.By >
+                            <AxisAngleRotation3D Axis="0,00,-1" Angle="90"/>
+                        </Rotation3DAnimation.By>
+                        
+                    </Rotation3DAnimation>
+
+                    <DoubleAnimation
+                    Storyboard.TargetName="NewImageTranslate"
+                    Storyboard.TargetProperty="OffsetX"
+                    From="-2"
+                    To="0"
+                    Duration="0:0:1.0" />
+                </Storyboard>
+                <!--<Storyboard  Completed="Storyboard_Completed" FillBehavior="Stop">
              
             
                 <DoubleAnimation 
