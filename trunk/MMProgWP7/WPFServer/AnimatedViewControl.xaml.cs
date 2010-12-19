@@ -28,6 +28,7 @@ namespace WPFServer
         }
         Storyboard sb;
 
+        //Calculate vertexes for image W, H, and defined Z
         Point3DCollection CalcXY(double imw, double imh, double z)
         {
 
@@ -82,15 +83,14 @@ namespace WPFServer
 
                 //w = (NewImageBrush.ImageSource as BitmapSource).Width;
                 //h = (NewImageBrush.ImageSource as BitmapSource).Height;
-                //w=(NewDiffuseMaterial.Brush as VisualBrush).Visual.
-                //w = 400;
-                //h = 300;
                 NewImageMesh.Positions = CalcXY(BrushWidth, BrushHeight, -0.0002);
             }
 
         }
         double BrushWidth;
         double BrushHeight;
+
+        //Update brush
         public void SetNewBrush(Brush brush, double w, double h)
         {
             OldDiffuseMaterial.Brush = NewDiffuseMaterial.Brush;
@@ -117,7 +117,7 @@ namespace WPFServer
              if (sb == null)
              {
                  sb = (Storyboard)(list[r.Next(0, list.Count)]);
-                 //sb = (Storyboard)(list[list.Count-1]);
+                 //sb = (Storyboard)(list[list.Count-1]);//Test last effect
                  if (sb != null)
                      sb.Begin(this);
              }
@@ -144,18 +144,11 @@ namespace WPFServer
 
         List<GeometryModel3D> historylist = new List<GeometryModel3D>();
 
+        //Update history, etc
         private void AddOldGeometryToList()
         {
-
-            
             MeshGeometry3D geo = new MeshGeometry3D();
-            //geo.Positions = new Point3DCollection();
-            //geo.Positions.Add(new Point3D(0, 0, 0));
-            //geo.Positions.Add(new Point3D(0, 1, 0));
-            //geo.Positions.Add(new Point3D(1, 1, 0));
-            //geo.Positions.Add(new Point3D(1, 0, 0));
             geo.Positions = CalcXY(BrushWidth, BrushHeight, -1);
-            //geo.TriangleIndices = new Int32Collection();
             geo.TriangleIndices.Add(2);
             geo.TriangleIndices.Add(1);
             geo.TriangleIndices.Add(0);
@@ -203,13 +196,8 @@ namespace WPFServer
                 
 
                 historylist[i].Transform=trg;
-                
-                //model3DGroup.Children.RemoveAt(2+i);//.Remove((Model3D)historylist[i]);
-
-                
 
             }
-            //model3DGroup.Children.Add(historylist[0]);
             model3DGroup.Children.Clear();
             for (int i = 0; i < historylist.Count; i++)
             {

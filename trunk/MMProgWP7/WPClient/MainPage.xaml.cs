@@ -75,51 +75,24 @@ namespace WPClient
         {
             if (e.TaskResult == TaskResult.OK)
             {
-                /*byte[] data = new byte[e.ChosenPhoto.Length];
-                e.ChosenPhoto.Read(data, 0, data.Length);
-                int rotate = 0;
-                if (accEvent.WaitOne(100))
-                {
-                    //signal arrived
-                    //KV: See http://windowsteamblog.com/windows_phone/b/wpdev/archive/2010/09/08/using-the-accelerometer-on-windows-phone-7.aspx
-                    //for accelero directions
-                    if (acceleroData.Y < -0.5)
-                        rotate = 90;
-                    else if (acceleroData.X > 0.5)
-                        rotate = 180;
-                    else if (acceleroData.Y > 0.5)
-                        rotate = 270;
-                }*/
+
+                //KV: See http://windowsteamblog.com/windows_phone/b/wpdev/archive/2010/09/08/using-the-accelerometer-on-windows-phone-7.aspx
+                //for accelero directions
+
 
                 App.CapturedImage = PictureDecoder.DecodeJpeg(e.ChosenPhoto);
 
 
                 using (IsolatedStorageFile storage = IsolatedStorageFile.GetUserStoreForApplication())
                 {
-                    //int angle = ImageHelper.GetAngleFromJpegStream(e.ChosenPhoto);//HACK HERE!!!
-                    //MemoryStream s = ImageHelper.ResampleRotateBitmapStream(e.ChosenPhoto, angle, 640, 70);
-                    //byte[] data = s.ToArray();
-                    //s.Close();
-                    
-                    
-                    //MyMessageDTO dto = new MyMessageDTO() { Owner = tbName.Text, Text = tbMessage.Text, ImageData = data };
-                    ////TODO do this automatically! Maybe construct MyMessageSL ad convert it to MyMessageDTO??
-                    //dto.Id = Guid.NewGuid();
-                    //IsolatedStorageFileStream location = new IsolatedStorageFileStream(dto.Id.ToString(), System.IO.FileMode.Create, storage);
-                    //System.IO.StreamWriter file = new System.IO.StreamWriter(location);
 
 
                     string name = tbName.Text;
                     string text = tbMessage.Text;
                     NavigationService.Navigate(new Uri("/PreviewPage.xaml?PreviewType=Preview&name=" + name + "&Text=" + text, UriKind.Relative));
                 }
-                //MMProgServiceClient client = new MMProgServiceClient();
-                //client.SendMessageToServerCompleted += new EventHandler<System.ComponentModel.AsyncCompletedEventArgs>(client_SendMessageToServerCompleted);
-                //MyMessageDTO dto = new MyMessageDTO() { Owner = tbName.Text, Text = tbMessage.Text, ImageData = data };
-                ////TODO do this automatically! Maybe construct MyMessageSL ad convert it to MyMessageDTO??
-                //dto.Id = Guid.NewGuid();
-                //client.SendMessageToServerAsync(dto);
-                
+
+
             }
         }
 
@@ -144,9 +117,7 @@ namespace WPClient
             MMProgServiceClient client = new MMProgServiceClient();
             client.SendMessageToServerCompleted += new EventHandler<System.ComponentModel.AsyncCompletedEventArgs>(client_SendMessageToServerCompleted);
             MyMessageDTO dto = new MyMessageDTO() { Owner = tbName.Text, Text = tbMessage.Text, ImageData = imgdata };
-            //TODO do this automatically! Maybe construct MyMessageSL ad convert it to MyMessageDTO??
             dto.Id = Guid.NewGuid();
-            //MyMessageSL dto = new MyMessageSL() { Owner = tbName.Text, Text = tbMessage.Text, ImageData = imgdata };
             client.SendMessageToServerAsync(dto);
             
 

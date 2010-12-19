@@ -25,8 +25,11 @@ namespace WPFServer
         public MainWindow()
         {
             InitializeComponent();
+            //instantiate service hoster
             hoster = new Hoster();
             hoster.MessageReceivedEvent += new Action<MyMessageDTO>(hoster_MessageReceivedEvent);
+            
+            //history slideshow timer
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(6);
             timer.Tick += new EventHandler(timer_Tick);
@@ -38,13 +41,12 @@ namespace WPFServer
         Hoster hoster;
         DispatcherTimer timer;
 
-        BitmapSource GetBitmapOfVisual(Visual vis)
+        /*BitmapSource GetBitmapOfVisual(Visual vis)
         {
             try
             {
 
-                Rect r = new Rect(0, 0, 300, 100);//
-                //Rect r = VisualTreeHelper.GetDescendantBounds(vis);
+                Rect r = new Rect(0, 0, 300, 100);
                 RenderTargetBitmap bmp = new RenderTargetBitmap((int)r.Width, (int)r.Height, 96, 96, PixelFormats.Pbgra32);
 
                 DrawingVisual visual = new DrawingVisual();
@@ -58,25 +60,20 @@ namespace WPFServer
             }
             catch { }
             return null;
-        }
+        }*/
 
+        //Show a new message in the 3D viewport
         void SetNewMessageView(MyMessage msg)
         {
             if (msg != null)
             {
                 MessageControl msgc = new MessageControl();
-                msgc.SetMessage(msg);
-                //msgc.Measure(new Size(300, 300));
-                //msgc.Width = animatedViewControl1.ActualWidth;
-                //msgc.Height = animatedViewControl1.ActualHeight;
-                
+                msgc.SetMessage(msg);       
                 msgc.MyMeasure();
                 VisualBrush vb = new VisualBrush(msgc);
                 vb.Stretch = Stretch.Fill;
                 vb.AlignmentX = AlignmentX.Center;
-                vb.AlignmentY = AlignmentY.Center;
-                
-                //animatedViewControl1.SetNewBrush(vb, msgc.Width, msgc.Height);
+                vb.AlignmentY = AlignmentY.Center;         
                 animatedViewControl1.SetNewBrush(vb, msgc.ActualWidth, msgc.ActualHeight);
             }
         }
@@ -84,16 +81,13 @@ namespace WPFServer
         void hoster_MessageReceivedEvent(MyMessageDTO obj)
         {
             
-            //KV: Is this actually they way it is usually done?
             Dispatcher.Invoke(
                 new Action(() =>
                 {
                     MyMessage msg = new MyMessage(obj);
                     lvMessages.Items.Add(msg);
                     lvMessages.ScrollIntoView(msg);
-                    //MessageControl msgc = new MessageControl();
-                    //msgc.SetMessage(msg);
-                    //animatedViewControl1.SetNewBrush(new VisualBrush(msgc), msgc.Width, msgc.Height);
+                    //enable slideshow after 10 secs
                     DisableRandomMessages();
                     EnableRandomMessagesAfter(10);
                     SetNewMessageView(msg);

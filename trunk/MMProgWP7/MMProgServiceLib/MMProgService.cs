@@ -17,6 +17,7 @@ namespace MMProgServiceLib
             MyServiceHost host = OperationContext.Current.Host as MyServiceHost;
             if (host != null)
             {
+                //Firing events, extensible without changing the interface
                 host.FireEvent("MessageReceived", message);
             }
             
