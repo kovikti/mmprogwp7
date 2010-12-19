@@ -35,6 +35,8 @@ namespace WPClient
             timer = new DispatcherTimer();
 
             listBox1.ItemsSource = App.newMessages;
+
+            tbName.Text = App.MyName;
         
             timer.Tick += new EventHandler(timer_Tick);
             
@@ -47,6 +49,8 @@ namespace WPClient
 
         void client_SendMessageToServerCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
         {
+
+
             //TODO error handling?
             (sender as MMProgServiceClient).CloseAsync();
         }
@@ -85,7 +89,7 @@ namespace WPClient
 
                 using (IsolatedStorageFile storage = IsolatedStorageFile.GetUserStoreForApplication())
                 {
-
+                    
 
                     string name = tbName.Text;
                     string text = tbMessage.Text;
@@ -145,7 +149,7 @@ namespace WPClient
             
         }
 
-        private void buttonDetails_Click(object sender, System.Windows.RoutedEventArgs e)
+        void ShowSelectedItemDetails()
         {
             if (listBox1.SelectedItem != null)
             {
@@ -155,7 +159,12 @@ namespace WPClient
             }
             else
                 MessageBox.Show("Please select an item in the list above");
-        	// TODO: Add event handler implementation here.
+        }
+
+        private void buttonDetails_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+            ShowSelectedItemDetails();
         }
 
         private void buttonRemove_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -170,7 +179,7 @@ namespace WPClient
                 MessageBox.Show("Please select an item in the list above");
         }
 
-        private void buttonFavsDetails_Click(object sender, System.Windows.RoutedEventArgs e)
+        void ShowSelectedFavItemDetails()
         {
             if (FavsList.SelectedItem != null)
             {
@@ -180,6 +189,10 @@ namespace WPClient
             }
             else
                 MessageBox.Show("Please select an item in the list above");
+        }
+        private void buttonFavsDetails_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            ShowSelectedFavItemDetails();
         }
 
         private void MainPivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -213,6 +226,21 @@ namespace WPClient
             }
             );
             client.GetNewMessagesAsync(lastReceivedGuid, 5);
+        }
+
+        private void tbName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+             App.MyName=tbName.Text ;
+        }
+
+        private void listBox1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ShowSelectedItemDetails();
+        }
+
+        private void FavsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ShowSelectedFavItemDetails();
         }
        
     }

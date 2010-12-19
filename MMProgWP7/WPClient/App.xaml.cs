@@ -31,6 +31,13 @@ namespace WPClient
 
         public static ObservableCollection<MyMessageSL> newMessages;
 
+        static string myName = "MyName";
+        public static string MyName
+        {
+            get { return myName; }
+            set { myName = value; }
+        }
+
         /// <summary>
         /// Constructor for the Application object.
         /// </summary>

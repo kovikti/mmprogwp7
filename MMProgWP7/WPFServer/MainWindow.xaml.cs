@@ -62,10 +62,12 @@ namespace WPFServer
             return null;
         }*/
 
+        MyMessage lastMessage = null;
+
         //Show a new message in the 3D viewport
         void SetNewMessageView(MyMessage msg)
         {
-            if (msg != null)
+            if (msg != null && lastMessage!=msg)
             {
                 MessageControl msgc = new MessageControl();
                 msgc.SetMessage(msg);       
@@ -75,6 +77,7 @@ namespace WPFServer
                 vb.AlignmentX = AlignmentX.Center;
                 vb.AlignmentY = AlignmentY.Center;         
                 animatedViewControl1.SetNewBrush(vb, msgc.ActualWidth, msgc.ActualHeight);
+                lastMessage = msg;
             }
         }
 
@@ -110,12 +113,13 @@ namespace WPFServer
         {
             SetNewMessageView(GetRandomMessage());
         }
-
+        //MyMessage lastRandomMessage = null;
         MyMessage GetRandomMessage()
         {
             Random r = new Random();
             int i = (int)(r.NextDouble() * lvMessages.Items.Count);
-            return (MyMessage)lvMessages.Items[i];
+            MyMessage selected=(MyMessage)lvMessages.Items[i];
+            return selected;
         }
 
         DispatcherTimer enableTimer;
