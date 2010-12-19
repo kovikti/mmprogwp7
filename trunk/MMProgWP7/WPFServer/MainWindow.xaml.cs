@@ -31,7 +31,7 @@ namespace WPFServer
             
             //history slideshow timer
             timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(6);
+            timer.Interval = TimeSpan.FromSeconds(10);
             timer.Tick += new EventHandler(timer_Tick);
             //timer.Start();
         }

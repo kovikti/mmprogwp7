@@ -116,8 +116,8 @@ namespace WPFServer
 
              if (sb == null)
              {
-                 //sb = (Storyboard)(list[r.Next(0, list.Count)]);
-                 sb = (Storyboard)(list[list.Count-1]);//Test last effect
+                 sb = (Storyboard)(list[r.Next(0, list.Count)]);
+                 //sb = (Storyboard)(list[list.Count-1]);//Test last effect
                  if (sb != null)
                      sb.Begin(this);
              }
@@ -146,6 +146,61 @@ namespace WPFServer
 
 
 
+
+        private void AddOldGeometryToList_()
+        {
+            MeshGeometry3D geo = new MeshGeometry3D();
+            geo.Positions = CalcXY(BrushWidth, BrushHeight, -1);
+
+
+            geo.TriangleIndices.Add(2);
+            geo.TriangleIndices.Add(1);
+            geo.TriangleIndices.Add(0);
+            geo.TriangleIndices.Add(3);
+            geo.TriangleIndices.Add(2);
+            geo.TriangleIndices.Add(0);
+            geo.Normals.Add(new Vector3D(0, 0, 1));
+            geo.Normals.Add(new Vector3D(0, 0, 1));
+            geo.TextureCoordinates.Add(new Point(0, 1));
+            geo.TextureCoordinates.Add(new Point(0, 0));
+            geo.TextureCoordinates.Add(new Point(1, 0));
+            geo.TextureCoordinates.Add(new Point(1, 1));
+
+
+
+            DiffuseMaterial mat = new DiffuseMaterial(OldDiffuseMaterial.Brush);
+            mat.Brush.Opacity = 0.4;
+
+
+
+
+            GeometryModel3D model = new GeometryModel3D(geo, mat);
+
+            for (int i = 0; i < model3DGroup.Children.Count;i++ )
+            {
+                GeometryModel3D m = model3DGroup.Children[i] as GeometryModel3D;
+                if (m != null)
+                {
+                    if (m.Transform == null)
+                    {
+                        m.Transform = new Transform3DGroup();
+                    }
+                    Transform3DGroup tg = m.Transform as Transform3DGroup;
+                    //animation: move 1..n back
+
+                    //animation, move 1. back
+
+                    //add continous moving animation to the 1.
+                }
+            }
+
+
+           
+            //OldImageMesh.Positions = CalcXY(BrushWidth, BrushHeight, -100);
+            //NewImageMesh.Positions = CalcXY(BrushWidth, BrushHeight, -100);
+
+
+        }
 
         //Update history, etc
         private void AddOldGeometryToList()
@@ -182,38 +237,77 @@ namespace WPFServer
              historylist.Insert(0,model);
             
             //model3DGroup.Children.Add(model);
-            while (historylist.Count > 7)
+            while (historylist.Count > 10)
             {
                 historylist.RemoveAt(historylist.Count - 1);
             }
+            Random r = new Random();
+            int animNum = r.Next(8);
             for (int i = 0; i < historylist.Count; i++)
             {
-                double ofset = 1.1;
+                double ofset = 2.1;
 
-                RotateTransform3D rot = new RotateTransform3D(new AxisAngleRotation3D(new Vector3D(0, 1, 0), +30));//-20
+                RotateTransform3D rot = new RotateTransform3D(new AxisAngleRotation3D(new Vector3D(0, 1, 0), -15));//+30
                 TranslateTransform3D tt1 = new TranslateTransform3D(0, 0, -0.1 - i * ofset);//1, 0.5+i*ofset, +2+i*ofset); -0.5-i*ofset
                 Transform3DGroup trg = new Transform3DGroup();
-                TranslateTransform3D tt2 = new TranslateTransform3D(+1.2, 0, 0);//-0.5
+                TranslateTransform3D tt2 = new TranslateTransform3D(+0.4, -0.5 + i / 2.0, 0);//1.2  -0.4+i/4.0
                 trg.Children.Add(tt1);
                 trg.Children.Add(rot);
                 trg.Children.Add(tt2);
 
 
-                TranslateTransform3D tt3 = new TranslateTransform3D();
+                
 
-                DoubleAnimation day = new DoubleAnimation(-0.5 * Math.Cos(i), 0.5 * Math.Cos(i), new Duration(TimeSpan.FromSeconds(3)));
+                
+                //if (r.NextDouble() > 0.8)
+                //if (i==2)
+                if (i==animNum)
+                {
+                    TranslateTransform3D tt3 = new TranslateTransform3D();
+                    DoubleAnimation day = new DoubleAnimation(0, 1 , new Duration(TimeSpan.FromSeconds(2)));
+                    //day.BeginTime = TimeSpan.FromSeconds(Math.Cos(i) / 3);
+                    day.BeginTime = TimeSpan.FromSeconds(0.5);
+                    day.AutoReverse = true;
+                    //day.RepeatBehavior = RepeatBehavior.Forever;
+                    day.AccelerationRatio = 0.1;
+                    day.DecelerationRatio = 0.1;
+                    tt3.BeginAnimation(TranslateTransform3D.OffsetYProperty, day);
+                    //model.Transform = tt3;
+                    trg.Children.Add(tt3);
+                    /*if (model.Transform==null || (!((model.Transform is Transform3DGroup)))){
+                        model.Transform=new Transform3DGroup();
+                    }
+
+                    if (model.Transform is Transform3DGroup)
+                    {
+                        ((Transform3DGroup)model.Transform).Children.Add( tt3);
+                    }*/
+                }
+
+                /*
+                DoubleAnimation day = new DoubleAnimation(-0.5 * Math.Cos(i) - i / 5.0, 0.5 * Math.Cos(i) + i / 5.0, new Duration(TimeSpan.FromSeconds(5)));
+                //day.BeginTime = TimeSpan.FromSeconds(Math.Cos(i) / 3);
                 day.AutoReverse = true;
                 day.RepeatBehavior = RepeatBehavior.Forever;
                 day.AccelerationRatio = 0.2;
                 day.DecelerationRatio = 0.2;
-                DoubleAnimation daz = new DoubleAnimation(-0.2 * Math.Cos(i), 0.2 * Math.Cos(i), new Duration(TimeSpan.FromSeconds(3)));
+                DoubleAnimation daz = new DoubleAnimation(-0.2 * Math.Cos(i), 0.2 * Math.Cos(i), new Duration(TimeSpan.FromSeconds(5)));
                 daz.AutoReverse = true;
                 daz.RepeatBehavior = RepeatBehavior.Forever;
                 daz.AccelerationRatio = 0.2;
                 daz.DecelerationRatio = 0.2;
+                DoubleAnimation dax = new DoubleAnimation(-0.2 * Math.Cos(i), 0.2 * Math.Cos(i), new Duration(TimeSpan.FromSeconds(5)));
+                dax.AutoReverse = true;
+                dax.RepeatBehavior = RepeatBehavior.Forever;
+                dax.AccelerationRatio = 0.2;
+                dax.DecelerationRatio = 0.2;
                 tt3.BeginAnimation(TranslateTransform3D.OffsetYProperty,day);
                 tt3.BeginAnimation(TranslateTransform3D.OffsetZProperty, daz);
-                trg.Children.Add(tt3);
+                tt3.BeginAnimation(TranslateTransform3D.OffsetZProperty, dax);*/
+
+
+
+               
 
                 historylist[i].Transform = trg;
 
@@ -221,7 +315,7 @@ namespace WPFServer
             model3DGroup.Children.Clear();
             for (int i = 0; i < historylist.Count; i++)
             {
-                if (i < 5)
+                if (i < 8)
                 {
                     model3DGroup.Children.Add(historylist[i]);
                 }
